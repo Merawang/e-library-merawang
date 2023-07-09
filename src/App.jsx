@@ -8,7 +8,7 @@ function App() {
     <>
       <div className="w-screen container mx-auto">
         <Navbar />
-        <div className="main-section px-6 pt-32">
+        <div className="main-section px-6 pt-32 pb-16">
           <Outlet />
         </div>
       </div>

@@ -7,7 +7,13 @@ import {
 
 import {
     Home,
-    App
+    App,
+    BookCatalog,
+    BorrowedBooks,
+    About,
+    Profile,
+    NotFound,
+    NotAuthorized
 } from '@/utils/pagesLoader';
 
 const isLoggedIn = () => {
@@ -20,7 +26,11 @@ const isLoggedIn = () => {
 const router = createBrowserRouter(createRoutesFromElements(
     <Route exact path='/' element={<App />}>
         <Route path='/' element={<Home />} />
-        <Route path='*' element={<>Not Found</>} />
+        <Route path='/book-catalog' element={<BookCatalog />} />
+        <Route path='/borrowed-books' element={isLoggedIn() ? <BorrowedBooks /> : <NotAuthorized />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/profile' element={<Profile />} />
+        <Route path='*' element={<NotFound />} />
     </Route>
 ))
 

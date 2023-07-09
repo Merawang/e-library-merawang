@@ -1,5 +1,6 @@
 import TimelineIcon from '@mui/icons-material/Timeline';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import BookIcon from '@mui/icons-material/Book';
 import InfoIcon from '@mui/icons-material/Info';
 import PersonIcon from '@mui/icons-material/Person';
 import { NavLink } from 'react-router-dom';
@@ -7,7 +8,11 @@ import { NavLink } from 'react-router-dom';
 
 const Navbar = ({ children }) => {
 
-    const username = "SeterangMerawang"
+    const username = "SeterangMerawang";
+
+    const isLoggedIn = () => {
+        return false;
+    }
 
     return (<>
         <nav className="w-full fixed top-0 left-0 right-0 shadow bg-white z-50 flex items-center justify-center">
@@ -22,13 +27,21 @@ const Navbar = ({ children }) => {
                     <NavLink to={'/book-catalog'} className='flex flex-row justify-center items-center gap-2'>
                         <div className="book-catalog font-semibold flex flex-row gap-2">
                             <LibraryBooksIcon className='text-sm' />
-                            <p>Book Catalog</p>
+                            <p>Katalog Buku</p>
                         </div>
                     </NavLink>
+                    {isLoggedIn() &&
+                        <NavLink to={'/borrowed-books'} className='flex flex-row justify-center items-center gap-2'>
+                            <div className="borrowed-books font-semibold flex flex-row gap-2">
+                                <BookIcon className='text-sm' />
+                                <p>Peminjaman Buku</p>
+                            </div>
+                        </NavLink>
+                    }
                     <NavLink to={'/about'} className='flex flex-row justify-center items-center gap-2'>
                         <div className="about font-semibold flex flex-row gap-2">
                             <InfoIcon className='text-sm' />
-                            <p>About</p>
+                            <p>Tentang</p>
                         </div>
                     </NavLink>
                     <NavLink to={'/profile'} className='flex flex-row justify-center items-center gap-2'>
