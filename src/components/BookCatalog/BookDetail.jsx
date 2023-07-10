@@ -1,0 +1,85 @@
+import { forwardRef } from 'react';
+
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContentText from '@mui/material/DialogContentText';
+import Grow from '@mui/material/Grow';
+import Chip from '@mui/material/Chip';
+
+import DoneIcon from '@mui/icons-material/Done';
+import BlockIcon from '@mui/icons-material/Block';
+import GoogleIcon from '@mui/icons-material/Google';
+
+
+const Transition = forwardRef(function Transition(props, ref) {
+    // return <Slide direction="up" ref={ref} {...props} />;
+    return <Grow ref={ref} {...props} />
+});
+
+const BookDetail = ({ book, isOpen, handleClose }) => {
+
+    const isLoggedIn = () => {
+        return true
+    }
+
+    return (<>
+        <Dialog
+            open={isOpen}
+            TransitionComponent={Transition}
+            onClose={handleClose}
+            maxWidth='md'
+        >
+            <DialogTitle>
+                <h5 className="font-bold mb-2">{book.title}</h5>
+                <div className="category-tags flex flex-row gap-1 mb-2">
+                    {book.subjects.map((subject) => {
+                        return (<Chip size='small' label={subject} />)
+                    })}
+                </div>
+            </DialogTitle>
+
+            <DialogContent>
+                <div className="wrapper flex flex-row h-[30rem] gap-4">
+                    <div className="image basis-1/3">
+                        <img src={book.imageUrl} alt={book.title} loading='lazy' className='w-full' />
+                        <div className="flex flex-row gap-2 mt-2 status-tags absolute">
+                            <p>Status: </p>
+                            {book.isAvailable ?
+                                <Chip size='small' icon={<DoneIcon />} color="success" label={`Tersedia (${book.stock})`} className='shadow' />
+                                :
+                                <Chip size='small' icon={<BlockIcon />} color="warning" label="Stok habis" className='shadow' />
+                            }
+
+                        </div>
+                    </div>
+                    <div className="content-right basis-2/3 h-full text-base overflow-y-auto">
+                        <div className="detail-info mb-5">
+                            <p id='author'><span className='font-bold'>Penulis:</span> {book.authors.map((author, i, arr) => {
+                                return (arr.length - 1 !== i) ? `${author}, ` : `${author}`
+                            })} </p>
+                            <p id="publisher"><span className='font-bold'>Publisher:</span> {book.publisher}</p>
+                            <p id="publicationDate"><span className='font-bold'>Tanggal Publikasi:</span> {book.publicationDate}</p>
+                            <p id="isbn"><span className='font-bold'>ISBN:</span> {book.isbn}</p>
+                            <p id="ddc"><span className='font-bold'>DDC:</span> {book.ddc}</p>
+                            <p id="lcc"><span className='font-bold'>LCC:</span> {book.lcc}</p>
+                            <p id="pageCount"><span className='font-bold'>Jumlah Halaman:</span> {book.pageCount}</p>
+                        </div>
+                        <DialogContentText>
+                            {book.description}
+                        </DialogContentText>
+                    </div>
+                </div>
+            </DialogContent>
+            <DialogActions>
+                <Button color='mainBlue' variant='text' sx={{ m: 1 }} onClick={handleClose}>Close</Button>
+                <Button color='mainBlue' endIcon={<GoogleIcon color='' size='small' />} variant={isLoggedIn() ? 'outlined' : 'contained'} sx={{ m: 1 }}>Read Google Books</Button>
+                {isLoggedIn() && <Button color='mainBlue'variant='contained' sx={{ m: 1 }}>Borrow</Button>}
+            </DialogActions>
+        </Dialog>
+    </>);
+}
+
+export default BookDetail;

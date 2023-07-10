@@ -14,15 +14,37 @@ import SearchIcon from '@mui/icons-material/Search';
 
 const SearchBox = () => {
 
-    const [filter, setFilter] = useState('');
-    const [sort, setSort] = useState('');
+    const filter = [
+        {
+            title: 'Category',
+            value: 'category'
+        },
+        {
+            title: 'Publisher',
+            value: 'publisher'
+        },
+    ]
+
+    const sort = [
+        {
+            title: 'Nama (A-Z)',
+            value: 'nameAsc'
+        },
+        {
+            title: 'Nama (Z-A)',
+            value: 'nameDesc'
+        },
+    ]
+
+    const [selectedFilter, setSelectedFilter] = useState('');
+    const [selectedSort, setSelectedSort] = useState('');
 
     const handleFilter = (event) => {
-        setFilter(event.target.value);
+        setSelectedFilter(event.target.value);
     };
 
     const handleSort = (event) => {
-        setSort(event.target.value);
+        setSelectedSort(event.target.value);
     }
 
     return (<>
@@ -48,13 +70,15 @@ const SearchBox = () => {
                     <Select
                         labelId="demo-select-small-label"
                         id="demo-select-small"
-                        value={filter}
+                        value={selectedFilter}
                         label="Filter"
                         onChange={handleFilter}
                     >
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
+                        {!!filter.length && filter.map((item) => {
+                            return (
+                                <MenuItem value={item.value}>{item.title}</MenuItem>
+                            )
+                        })}
                     </Select>
                 </FormControl>
             </div>
@@ -64,13 +88,15 @@ const SearchBox = () => {
                     <Select
                         labelId="demo-select-small-label"
                         id="demo-select-small"
-                        value={sort}
+                        value={selectedSort}
                         label="Sort"
                         onChange={handleSort}
                     >
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
+                        {!!sort.length && sort.map((item) => {
+                            return (
+                                <MenuItem value={item.value}>{item.title}</MenuItem>
+                            )
+                        })}
                     </Select>
                 </FormControl>
             </div>

@@ -3,6 +3,7 @@ import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import BookIcon from '@mui/icons-material/Book';
 import InfoIcon from '@mui/icons-material/Info';
 import PersonIcon from '@mui/icons-material/Person';
+import LoginIcon from '@mui/icons-material/Login';
 import { NavLink } from 'react-router-dom';
 
 
@@ -11,7 +12,7 @@ const Navbar = ({ children }) => {
     const username = "SeterangMerawang";
 
     const isLoggedIn = () => {
-        return false;
+        return true;
     }
 
     return (<>
@@ -47,8 +48,17 @@ const Navbar = ({ children }) => {
                     <NavLink to={'/profile'} className='flex flex-row justify-center items-center gap-2'>
                         <div className="profile font-semibold bg-blue-600 text-white py-2 px-4 rounded-full">
                             <div className='flex flex-row gap-2'>
-                                <PersonIcon className='text-sm' />
-                                <p>{username}</p>
+                                {isLoggedIn() ?
+                                    <>
+                                        <PersonIcon className='text-sm' />
+                                        <p>{username}</p>
+                                    </>
+                                    :
+                                    <>
+                                        <LoginIcon className='text-sm' />
+                                        <p>Sign In</p>
+                                    </>
+                                }
                             </div>
                         </div>
                     </NavLink>
