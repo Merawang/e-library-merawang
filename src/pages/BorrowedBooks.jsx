@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 
-import { SearchBox, BorrowedBooksCard } from "@/utils/componentsLoader";
+import Alert from "@mui/material/Alert";
+
 import useFetch from "@/hooks/useFetch";
 import { useBorrowContext } from "@/hooks/context/useBorrowContext";
+import { SearchBox, BorrowedBooksCard, CardLoading, NoBook } from "@/utils/componentsLoader";
 
 const BorrowedBooks = () => {
 
@@ -14,6 +16,19 @@ const BorrowedBooks = () => {
 
     useFetch({ url: baseurl, dispatch, type: 'get_borrows', setLoading, setMessage });
 
+    // Searching
+    const [searchText, setSearchText] = useState('')
+    const [filteredBorrows, setFilteredBorrows] = useState([]);
+    useEffect(() => setFilteredBorrows(borrows), [borrows]);
+
+    const filter = (value) => {
+        const filtered = borrows?.filter((item) =>
+            item?.books?.title?.toLowerCase().includes(value.toLowerCase()) || item?.borrowedBy?.name?.toLowerCase().includes(value.toLowerCase())
+        );
+
+        filtered[0] ? setFilteredBorrows(filtered) : setFilteredBorrows([]);
+    }
+
     return (<>
         <Helmet>
             <meta charSet="utf-8" />
@@ -23,10 +38,23 @@ const BorrowedBooks = () => {
         <div className="main">
             <h1 className="font-bold text-2xl text-blue-600 sticky bg-white top-0">Peminjaman Buku</h1>
             <div className="search-wrapper pt-8 mb-5 sticky top-12 bg-white">
-                <SearchBox />
+                <SearchBox
+                    placeholder={'Cari berdasarkan buku atau peminjam di sini..'}
+                    searchText={searchText}
+                    setSearchText={setSearchText}
+                    filter={filter}
+                />
+            </div>
+            <div className="message">
+                {message.error &&
+                    <Alert variant="filled" className="mb-5" severity={message.severity}>
+                        {message.message}
+                    </Alert>
+                }
             </div>
             <div className="card-wrapper grid grid-flow-row-dense grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                {!!borrows.length && borrows?.map((borrow) => {
+                {!filteredBorrows.length && (isPending ? <CardLoading /> : <NoBook />)}
+                {!!filteredBorrows.length && filteredBorrows?.map((borrow) => {
                     return (
                         <BorrowedBooksCard borrow={borrow} key={borrow._id} />
                     )

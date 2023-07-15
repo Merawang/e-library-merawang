@@ -30,7 +30,7 @@ const AddBook = ({ isOpen, handleClose }) => {
             maxWidth='md'
         >
             <DialogTitle>
-                <h5 className="font-bold mb-2">Tambah Buku</h5>
+                <p className="font-bold mb-2">Tambah Buku</p>
             </DialogTitle>
 
             <DialogContent>

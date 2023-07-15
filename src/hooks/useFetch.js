@@ -11,7 +11,7 @@ const useFetch = ({ url, dispatch, type, setLoading, setMessage }) => {
                     const fetcher = createFetcher();
                     const response = await fetcher.get(url);
 
-                    console.log(response);
+                    // console.log(response);
 
                     dispatch({ type, payload: response.data });
                     setMessage({ error: false, severity: 'success', message: `Sukses melakukan fetch data` })

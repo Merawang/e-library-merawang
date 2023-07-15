@@ -10,12 +10,9 @@ import ListSubheader from '@mui/material/ListSubheader';
 
 import SearchIcon from '@mui/icons-material/Search';
 
+const SearchBox = ({ placeholder, searchText, setSearchText, filter }) => {
 
-
-
-const SearchBox = () => {
-
-    const filter = [
+    const filterList = [
         {
             title: 'Horror',
             value: 'horror'
@@ -26,7 +23,7 @@ const SearchBox = () => {
         },
     ]
 
-    const sort = [
+    const sortList = [
         {
             title: 'Nama (A-Z)',
             value: 'nameAsc'
@@ -48,15 +45,24 @@ const SearchBox = () => {
         setSelectedSort(event.target.value);
     }
 
+    const handleInputChange = (event) => {
+        const value = event.target.value;
+        setSearchText(value);
+        filter(value);
+    }
+
+
     return (<>
         <div className="search flex flex-row gap-2 items-start justify-center">
             <TextField
                 fullWidth
+                onChange={handleInputChange}
                 label="Cari judul buku"
-                placeholder='Contoh: Negeri 5 Menara'
+                placeholder={placeholder}
                 id="search"
                 margin='dense'
                 size='small'
+                value={searchText}
                 InputProps={{
                     endAdornment: (
                         <InputAdornment position="end">
@@ -76,14 +82,11 @@ const SearchBox = () => {
                         onChange={handleFilter}
                     >
                         <ListSubheader>Category</ListSubheader>
-                        {!!filter.length && filter.map((item, i) => {
+                        {!!filterList.length && filterList.map((item, i) => {
                             return (
                                 <MenuItem key={i} value={item.value}>{item.title}</MenuItem>
                             )
                         })}
-                        <ListSubheader>Publisher</ListSubheader>
-                        <MenuItem value={3}>Option 3</MenuItem>
-                        <MenuItem value={4}>Option 4</MenuItem>
                     </Select>
                 </FormControl>
             </div>
@@ -97,7 +100,7 @@ const SearchBox = () => {
                         label="Sort"
                         onChange={handleSort}
                     >
-                        {!!sort.length && sort.map((item, i) => {
+                        {!!sortList.length && sortList.map((item, i) => {
                             return (
                                 <MenuItem key={i} value={item.value}>{item.title}</MenuItem>
                             )

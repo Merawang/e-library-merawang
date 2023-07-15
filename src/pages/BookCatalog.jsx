@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 
 import Fab from "@mui/material/Fab";
@@ -28,6 +28,19 @@ const BookCatalog = () => {
         setOpen(false);
     };
 
+    // Searching
+    const [searchText, setSearchText] = useState('')
+    const [filteredBooks, setFilteredBooks] = useState([]);
+    useEffect(() => setFilteredBooks(books), [books]);
+
+    const filter = (value) => {
+        const filtered = books?.filter((item) =>
+            item?.title?.toLowerCase().includes(value.toLowerCase())
+        );
+
+        filtered[0] ? setFilteredBooks(filtered) : setFilteredBooks([]);
+    }
+
     return (<>
         <Helmet>
             <meta charSet="utf-8" />
@@ -38,17 +51,23 @@ const BookCatalog = () => {
         <div className="main">
             <h1 className="font-bold text-2xl text-blue-600 sticky bg-white top-0">Katalog Buku</h1>
             <div className="search-wrapper pt-8 mb-5 sticky top-12 bg-white">
-                <SearchBox />
+                <SearchBox
+                    placeholder={'Cari buku kesukaanmu di sini..'}
+                    searchText={searchText}
+                    setSearchText={setSearchText}
+                    filter={filter}
+                />
             </div>
-            {message.error &&
-                <Alert variant="filled" className="mb-5" severity={message.severity}>
-                    {message.message}
-                </Alert>
-            }
+            <div className="message">
+                {message.error &&
+                    <Alert variant="filled" className="mb-5" severity={message.severity}>
+                        {message.message}
+                    </Alert>
+                }
+            </div>
             <div className="card-wrapper grid grid-flow-row-dense grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 ">
-                {isPending ? <CardLoading /> : !!books.length ? '' : <NoBook/>}
-                {!!books.length}
-                {!!books.length && books?.map((book, i) => {
+                {!filteredBooks.length && (isPending ? <CardLoading /> : <NoBook handleOpen={handleOpen} />)}
+                {!!filteredBooks.length && filteredBooks?.map((book, i) => {
                     return (
                         <BookCard book={book} key={book._id} />
                     )
