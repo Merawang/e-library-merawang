@@ -9,16 +9,16 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle'
 
 const Home = () => {
-    const [isOPen, setisOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
 
     const username = 'SeterangMerawang'
 
     const handleOpen = () => {
-        setisOpen(true);
+        setIsOpen(true);
     };
 
     const handleClose = () => {
-        setisOpen(false);
+        setIsOpen(false);
     };
 
     return (<>
@@ -35,7 +35,7 @@ const Home = () => {
         <div className="text-center mt-24 font-semibold underline text-gray-400">
             <button className='underline' onClick={handleOpen}>Cara Penggunaan 🛈</button>
             <Dialog
-                open={isOPen}
+                open={isOpen}
                 onClose={handleClose}
             >
                 <DialogTitle>

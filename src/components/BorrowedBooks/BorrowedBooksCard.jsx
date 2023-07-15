@@ -12,7 +12,7 @@ import BlockIcon from '@mui/icons-material/Block';
 import { BookDetail } from '@/utils/componentsLoader';
 
 
-const BookCard = ({ book }) => {
+const BorrowedBooksCard = ({ borrow }) => {
 
     const [isOpen, setOpen] = useState(false);
 
@@ -26,30 +26,22 @@ const BookCard = ({ book }) => {
 
     return (<>
         <div className='card mb-12'>
-            <BookDetail book={book} isOpen={isOpen} handleClose={handleClose} />
+            {/* <BookDetail book={book} isOpen={isOpen} handleClose={handleClose} /> */}
             <Card>
                 <CardMedia
                     component="img"
                     sx={{ minHeight: 100 }}
-                    image={book?.imageUrl}
-                    title={book?.title}
+                    image={borrow?.books.imageUrl}
+                    title={borrow?.books.title}
                 />
-                <div className="status-tags ml-3 mt-3">
-                    {book?.isAvailable ?
-                        <Chip size='small' icon={<DoneIcon />} color="success" label={`Tersedia (${book?.stock})`} className='shadow' />
-                        :
-                        <Chip size='small' icon={<BlockIcon />} color="warning" label="Stok buku habis" className='shadow' />
-                    }
-
-                </div>
                 <CardContent>
-                    <h5 className='text-xl font-bold mb-2'>{book?.title}</h5>
+                    <h5 className='text-xl font-bold mb-2'>{borrow?.books.title}</h5>
                     <div className="category-tags flex flex-row gap-1 mb-2">
-                        {book.subjects && book?.subjects.map((subject, i) => {
+                        {borrow?.books.subjects && borrow?.books.subjects.map((subject, i) => {
                             return (<Chip size='small' key={i} label={subject} />)
                         })}
                     </div>
-                    <p className='text-base text-gray-500'>{book?.description.length > 150 && book?.description.substring(0, 150) + '...'}</p>
+                    <p className='text-base text-gray-500'>{borrow?.books.description.length > 150 && borrow?.books.description.substring(0, 150) + '...'}</p>
                 </CardContent>
                 <CardActions sx={{ m: 1 }}>
                     <Button variant='contained' color='mainBlue' onClick={handleOpen}>Detail</Button>
@@ -59,4 +51,4 @@ const BookCard = ({ book }) => {
     </>);
 }
 
-export default BookCard;
+export default BorrowedBooksCard;

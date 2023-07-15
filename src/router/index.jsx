@@ -21,7 +21,7 @@ const isLoggedIn = () => {
 
     // Auth logic..
 
-    return true
+    return true;
 }
 
 const router = createBrowserRouter(createRoutesFromElements(

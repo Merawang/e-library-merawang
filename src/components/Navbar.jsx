@@ -25,46 +25,44 @@ const Navbar = ({ children }) => {
                     </NavLink>
                 </div>
                 <div className="content-right flex flex-row gap-4 justify-center items-center">
-                    <NavLink to={'/book-catalog'} className='flex flex-row justify-center items-center gap-2'>
+                    <NavLink to={'/book-catalog'} className={({ isActive }) => isActive ? "text-blue-500 transition-all" : "text-black" + "flex flex-row justify-center items-center gap-2 transition-all"}>
                         <div className="book-catalog font-semibold flex flex-row gap-2">
                             <LibraryBooksIcon className='text-sm' />
                             <p>Katalog Buku</p>
                         </div>
                     </NavLink>
                     {isLoggedIn() &&
-                        <NavLink to={'/borrowed-books'} className='flex flex-row justify-center items-center gap-2'>
+                        <NavLink to={'/borrowed-books'} className={({ isActive }) => isActive ? "text-blue-500 transition-all" : "text-black" + "flex flex-row justify-center items-center gap-2 transition-all"}>
                             <div className="borrowed-books font-semibold flex flex-row gap-2">
                                 <BookIcon className='text-sm' />
                                 <p>Peminjaman Buku</p>
                             </div>
                         </NavLink>
                     }
-                    <NavLink to={'/about'} className='flex flex-row justify-center items-center gap-2'>
+                    <NavLink to={'/about'} className={({ isActive }) => isActive ? "text-blue-500 transition-all" : "text-black" + "flex flex-row justify-center items-center gap-2 transition-all"}>
                         <div className="about font-semibold flex flex-row gap-2">
                             <InfoIcon className='text-sm' />
                             <p>Tentang</p>
                         </div>
                     </NavLink>
-                    <NavLink to={'/profile'} className='flex flex-row justify-center items-center gap-2'>
-                        <div className="profile font-semibold bg-blue-600 text-white py-2 px-4 rounded-full">
-                            <div className='flex flex-row gap-2'>
-                                {isLoggedIn() ?
-                                    <>
-                                        <PersonIcon className='text-sm' />
-                                        <p>{username}</p>
-                                    </>
-                                    :
-                                    <>
-                                        <LoginIcon className='text-sm' />
-                                        <p>Sign In</p>
-                                    </>
-                                }
-                            </div>
+                    <NavLink to={'/profile'} className={({ isActive }) => isActive ? "bg-blue-600 text-white py-2 px-4 rounded-full transition-all" : "flex flex-row justify-center items-center gap-2 text-black transition-all"}>
+                        <div className='flex flex-row gap-2'>
+                            {isLoggedIn() ?
+                                <>
+                                    <PersonIcon className='text-sm' />
+                                    <p>{username}</p>
+                                </>
+                                :
+                                <>
+                                    <LoginIcon className='text-sm' />
+                                    <p>Sign In</p>
+                                </>
+                            }
                         </div>
                     </NavLink>
                 </div>
             </div>
-        </nav>
+        </nav >
     </>);
 }
 

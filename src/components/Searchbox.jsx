@@ -6,6 +6,7 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import ListSubheader from '@mui/material/ListSubheader';
 
 import SearchIcon from '@mui/icons-material/Search';
 
@@ -16,12 +17,12 @@ const SearchBox = () => {
 
     const filter = [
         {
-            title: 'Category',
-            value: 'category'
+            title: 'Horror',
+            value: 'horror'
         },
         {
-            title: 'Publisher',
-            value: 'publisher'
+            title: 'References',
+            value: 'references'
         },
     ]
 
@@ -74,11 +75,15 @@ const SearchBox = () => {
                         label="Filter"
                         onChange={handleFilter}
                     >
-                        {!!filter.length && filter.map((item) => {
+                        <ListSubheader>Category</ListSubheader>
+                        {!!filter.length && filter.map((item, i) => {
                             return (
-                                <MenuItem value={item.value}>{item.title}</MenuItem>
+                                <MenuItem key={i} value={item.value}>{item.title}</MenuItem>
                             )
                         })}
+                        <ListSubheader>Publisher</ListSubheader>
+                        <MenuItem value={3}>Option 3</MenuItem>
+                        <MenuItem value={4}>Option 4</MenuItem>
                     </Select>
                 </FormControl>
             </div>
@@ -92,9 +97,9 @@ const SearchBox = () => {
                         label="Sort"
                         onChange={handleSort}
                     >
-                        {!!sort.length && sort.map((item) => {
+                        {!!sort.length && sort.map((item, i) => {
                             return (
-                                <MenuItem value={item.value}>{item.title}</MenuItem>
+                                <MenuItem key={i} value={item.value}>{item.title}</MenuItem>
                             )
                         })}
                     </Select>
