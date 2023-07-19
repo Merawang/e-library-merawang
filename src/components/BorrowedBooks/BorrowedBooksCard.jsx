@@ -5,28 +5,14 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
-import Chip from '@mui/material/Chip';
-import DoneIcon from '@mui/icons-material/Done';
-import BlockIcon from '@mui/icons-material/Block';
-
-import { BorrowedBooksDetail } from '@/utils/componentsLoader';
 
 
-const BorrowedBooksCard = ({ borrow }) => {
 
-    const [isOpen, setOpen] = useState(false);
-
-    const handleOpen = () => {
-        setOpen(true);
-    }
-
-    const handleClose = () => {
-        setOpen(false);
-    }
+const BorrowedBooksCard = ({ borrow, isOpen, handleOpen, handleClose }) => {
 
     return (<>
+
         <div className='card mb-12'>
-            <BorrowedBooksDetail borrow={borrow} isOpen={isOpen} handleClose={handleClose} />
             <Card>
                 <CardMedia
                     component="img"
@@ -35,7 +21,7 @@ const BorrowedBooksCard = ({ borrow }) => {
                     title={borrow?.books.title}
                 />
                 <CardContent>
-                    <h5 className='text-xl font-bold mb-2'>{borrow?.books.title}</h5>
+                    <p className='text-xl font-bold mb-2'>{borrow?.books.title}</p>
                     <div className="borrowedBy">
                         <p className='text-gray-500'><span className='font-bold ' >Dipinjam oleh: </span>{borrow?.borrowedBy?.name}</p>
                     </div>

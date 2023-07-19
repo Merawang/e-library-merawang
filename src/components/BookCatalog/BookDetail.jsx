@@ -35,7 +35,7 @@ const BookDetail = ({ book, isOpen, handleClose }) => {
             maxWidth='md'
         >
             <DialogTitle>
-                <h5 className="font-bold mb-2">{book?.title}</h5>
+                <p className="font-bold mb-2">{book?.title}</p>
                 <div className="category-tags flex flex-row gap-1 mb-2">
                     {book.subjects && book?.subjects.map((subject, i) => {
                         return (<Chip size='small' label={subject} key={i} />)

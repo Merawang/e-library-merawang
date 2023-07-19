@@ -32,7 +32,7 @@ const BorrowedBooksDetail = ({ borrow, isOpen, handleClose }) => {
             maxWidth='md'
         >
             <DialogTitle>
-                <h5 className="font-bold mb-2">{borrow?.books?.title}</h5>
+                <p className="font-bold mb-2">{borrow?.books?.title}</p>
                 <div className="category-tags flex flex-row gap-1 mb-2">
                     {borrow.books?.subjects && borrow?.books?.subjects.map((subject, i) => {
                         return (<Chip size='small' label={subject} key={i} />)
