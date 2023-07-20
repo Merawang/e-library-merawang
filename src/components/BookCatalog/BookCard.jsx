@@ -25,7 +25,7 @@ const BookCard = ({ book }) => {
     }
 
     return (<>
-        <div className='card mb-12'>
+        <div className='card mb-6'>
             <BookDetail book={book} isOpen={isOpen} handleClose={handleClose} />
             <Card>
                 <CardMedia
@@ -49,7 +49,7 @@ const BookCard = ({ book }) => {
                             return (<Chip size='small' key={i} label={subject} />)
                         })}
                     </div>
-                    <p className='text-base text-gray-500'>{book?.description.length > 150 && book?.description.substring(0, 150) + '...'}</p>
+                    <p className='text-base text-gray-500'>{book?.description?.length > 150 ? book?.description.substring(0, 150) + '...' : book?.description}</p>
                 </CardContent>
                 <CardActions sx={{ m: 1 }}>
                     <Button variant='contained' color='mainBlue' onClick={handleOpen}>Detail</Button>

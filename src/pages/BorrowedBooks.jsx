@@ -13,7 +13,7 @@ import { SearchBox, BorrowedBooksCard, BorrowedBooksDetail, CardLoading, NoBook,
 
 const BorrowedBooks = () => {
 
-    const baseurl = `${import.meta.env.VITE_BACKEND_BASEURL}/borrows`;
+    const baseurl = `${import.meta.env.VITE_BACKEND_BASEURL}/api/borrows`;
     const viewList = [
         { title: 'Card', value: 'card' },
         { title: 'Table', value: 'table' }
@@ -22,16 +22,18 @@ const BorrowedBooks = () => {
     const { borrows, dispatch } = useBorrowContext();
     const [isPending, setLoading] = useState(false);
     const [message, setMessage] = useState(false);
-    const [selectedView, setSelectedView] = useState({ title: 'Card', value: 'card' });
+    const [selectedView, setSelectedView] = useState({ title: 'Table', value: 'table' });
+    const [borrowDetail, setBorrowDetail] = useState({});
 
     // Modal
     const [isOpen, setOpen] = useState(false);
 
-    const handleOpen = () => {
+    const handleOpen = (borrow) => {
+        setBorrowDetail(borrow)
         setOpen(true);
     }
-
-    const handleClose = () => {
+    
+    const handleClose = (borrow) => {
         setOpen(false);
     }
 
@@ -62,14 +64,8 @@ const BorrowedBooks = () => {
         </Helmet>
         <div className="main">
             <h1 className="font-bold text-2xl text-blue-600 sticky bg-white top-0">Peminjaman Buku</h1>
-            <div className="search-wrapper pt-8 mb-5 sticky top-12 bg-white">
-                <SearchBox
-                    placeholder={'Cari berdasarkan buku atau peminjam di sini..'}
-                    searchText={searchText}
-                    setSearchText={setSearchText}
-                    filter={filter}
-                />
-                <div className="change-view text-end">
+            <div className="search-wrapper flex pt-8 mb-5 sticky w-full top-12 bg-white">
+                <div className="change-view mr-2">
                     <FormControl sx={{ my: 1, minWidth: 80 }} size="small">
                         <InputLabel id="demo-select-small-label">View</InputLabel>
                         <Select
@@ -87,6 +83,14 @@ const BorrowedBooks = () => {
                         </Select>
                     </FormControl>
                 </div>
+                <div className="search w-full">
+                    <SearchBox
+                        placeholder={'Cari berdasarkan buku atau peminjam di sini..'}
+                        searchText={searchText}
+                        setSearchText={setSearchText}
+                        filter={filter}
+                    />
+                </div>
             </div>
             <div className="message">
                 {message.error &&
@@ -98,13 +102,7 @@ const BorrowedBooks = () => {
             <div className="error">
                 {!filteredBorrows.length && (isPending ? <CardLoading /> : <NoBook />)}
             </div>
-            <div className="book-detail">
-                {!!filteredBorrows.length && filteredBorrows?.map((borrow) => {
-                    return (
-                        <BorrowedBooksDetail borrow={borrow} isOpen={isOpen} handleClose={handleClose} />
-                    )
-                })}
-            </div>
+            <BorrowedBooksDetail borrow={borrowDetail} isOpen={isOpen} handleClose={handleClose} />
             {selectedView.value === 'card' ?
                 <div className="card-wrapper grid grid-flow-row-dense grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
                     {!!filteredBorrows.length && filteredBorrows?.map((borrow) => {

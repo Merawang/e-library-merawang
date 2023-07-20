@@ -6,8 +6,6 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 
-
-
 const BorrowedBooksCard = ({ borrow, isOpen, handleOpen, handleClose }) => {
 
     return (<>
@@ -27,7 +25,7 @@ const BorrowedBooksCard = ({ borrow, isOpen, handleOpen, handleClose }) => {
                     </div>
                 </CardContent>
                 <CardActions sx={{ m: 1 }}>
-                    <Button variant='contained' color='mainBlue' onClick={handleOpen}>Detail</Button>
+                    <Button variant='contained' color='mainBlue' onClick={() => handleOpen(borrow)}>Detail</Button>
                 </CardActions>
             </Card>
         </div>

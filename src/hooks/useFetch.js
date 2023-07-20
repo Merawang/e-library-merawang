@@ -1,5 +1,5 @@
-import { createFetcher } from "@/utils/fetcher";
 import { useEffect } from "react";
+import axios from "axios";
 
 const useFetch = ({ url, dispatch, type, setLoading, setMessage }) => {
 
@@ -8,12 +8,11 @@ const useFetch = ({ url, dispatch, type, setLoading, setMessage }) => {
             async () => {
                 setLoading(true);
                 try {
-                    const fetcher = createFetcher();
-                    const response = await fetcher.get(url);
+                    const response = await axios.get(url);
 
                     // console.log(response);
 
-                    dispatch({ type, payload: response.data });
+                    dispatch({ type, payload: response.data.data });
                     setMessage({ error: false, severity: 'success', message: `Sukses melakukan fetch data` })
 
                 }

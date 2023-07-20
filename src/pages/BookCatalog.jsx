@@ -9,13 +9,13 @@ import AddIcon from '@mui/icons-material/Add';
 import useFetch from "@/hooks/useFetch";
 import { useBookContext } from "@/hooks/context/useBookContext";
 import { SearchBox, BookCard, AddBook, CardLoading, NoBook } from "@/utils/componentsLoader";
+import { useDisplayContext } from "@/hooks/context/useDisplayContext";
 
 const BookCatalog = () => {
 
-    const baseurl = `${import.meta.env.VITE_BACKEND_BASEURL}/books`;
+    const baseurl = `${import.meta.env.VITE_BACKEND_BASEURL}/api/books`;
     const { books, dispatch } = useBookContext();
-    const [isPending, setLoading] = useState(false);
-    const [message, setMessage] = useState({});
+    const { isPending, setLoading, message, setMessage } = useDisplayContext();
     const [isOpen, setOpen] = useState(false);
 
     useFetch({ url: baseurl, dispatch, type: 'get_books', setLoading, setMessage });
@@ -65,7 +65,8 @@ const BookCatalog = () => {
                     </Alert>
                 }
             </div>
-            <div className="card-wrapper grid grid-flow-row-dense grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 ">
+            {/* <div className="card-wrapper grid grid-flow-row-dense grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 "> */}
+            <div className="card-wrapper columns-5 gap-6">
                 {!filteredBooks.length && (isPending ? <CardLoading /> : <NoBook handleOpen={handleOpen} />)}
                 {!!filteredBooks.length && filteredBooks?.map((book, i) => {
                     return (

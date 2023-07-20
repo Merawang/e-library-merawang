@@ -68,8 +68,8 @@ const BorrowedBooksDetail = ({ borrow, isOpen, handleClose }) => {
                             <p id="name"><span className='font-bold'>Dipinjam oleh:</span> {borrow?.borrowedBy?.name || '-'}</p>
                             <p id="address"><span className='font-bold'>Alamat Peminjam:</span> {borrow?.borrowedBy?.address || '-'}</p>
                             <p id="phoneNumber"><span className='font-bold'>No. HP:</span> {borrow?.borrowedBy?.phoneNumber || '-'}</p>
-                            <p id="borrowedDate"><span className='font-bold'>Tanggal Peminjaman:</span> {borrow?.books?.borrowedDate || '-'}</p>
-                            <p id="dueDate"><span className='font-bold'>Jatuh Tempo Peminjaman:</span> {borrow?.books?.dueDate || '-'}</p>
+                            <p id="borrowedDate"><span className='font-bold'>Tanggal Peminjaman:</span> {borrow?.borrowedDate?.split('T')[0] || '-'}</p>
+                            <p id="dueDate"><span className='font-bold'>Jatuh Tempo Peminjaman:</span> {borrow?.dueDate?.split('T')[0] || '-'}</p>
                         </div>
                     </div>
                 </div>

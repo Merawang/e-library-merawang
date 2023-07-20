@@ -14,6 +14,10 @@ import BlockIcon from '@mui/icons-material/Block';
 import GoogleIcon from '@mui/icons-material/Google';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import useDelete from '../../hooks/useDelete';
+
+import { useDisplayContext } from '@/hooks/context/useDisplayContext';
+import { useBookContext } from '@/hooks/context/useBookContext';
 
 
 const Transition = forwardRef(function Transition(props, ref) {
@@ -22,6 +26,17 @@ const Transition = forwardRef(function Transition(props, ref) {
 });
 
 const BookDetail = ({ book, isOpen, handleClose }) => {
+
+    const baseurl = `${import.meta.env.VITE_BACKEND_BASEURL}/api/books`;
+    const { dispatch } = useBookContext();
+    const { setLoading, setMessage } = useDisplayContext();
+
+    const { handleDelete } = useDelete({ url: baseurl, dispatch, type: 'deleted_book', setMessage, setLoading })
+
+    const handleSubmit = (e, id, title) => {
+        handleDelete(e, id, title);
+        handleClose();
+    }
 
     const isLoggedIn = () => {
         return true
@@ -74,7 +89,7 @@ const BookDetail = ({ book, isOpen, handleClose }) => {
                                 <Button size='small' color='warning' variant='contained' endIcon={<EditIcon color='' size='small' />}>Edit</Button>
                             </div>
                             <div className="delete-wrapper">
-                                <Button size='small' color='error' variant='contained' endIcon={<DeleteIcon color='' size='small' />}>Hapus</Button>
+                                <Button size='small' color='error' variant='contained' endIcon={<DeleteIcon color='' size='small' />} onClick={(e) => handleSubmit(e, book?._id, book?.title)}>Hapus</Button>
                             </div>
                         </div>
                         <DialogContentText>

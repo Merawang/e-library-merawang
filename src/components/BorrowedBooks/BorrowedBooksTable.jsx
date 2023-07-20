@@ -9,7 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 
-const BorrowedBooksTable = ({ borrows, isOpen, handleOpen, handleClose }) => {
+const BorrowedBooksTable = ({ borrows, isOpen, handleOpen, handleClose, setBorrowDetail }) => {
 
     return (<>
         <TableContainer component={Paper}>
@@ -37,9 +37,9 @@ const BorrowedBooksTable = ({ borrows, isOpen, handleOpen, handleClose }) => {
                             <TableCell align="left">{borrow?.borrowedBy?.name}</TableCell>
                             <TableCell align="left">{borrow?.borrowedBy?.address}</TableCell>
                             <TableCell align="left">{borrow?.borrowedBy?.phoneNumber}</TableCell>
-                            <TableCell align="left">{borrow?.borrowedDate}</TableCell>
-                            <TableCell align="left">{borrow?.dueDate}</TableCell>
-                            <TableCell align="left"><Button variant='contained' color='mainBlue' onClick={handleOpen}>Detail</Button></TableCell>
+                            <TableCell align="left">{borrow?.borrowedDate.split('T')[0]}</TableCell>
+                            <TableCell align="left">{borrow?.dueDate.split('T')[0]}</TableCell>
+                            <TableCell align="left"><Button variant='contained' color='mainBlue' onClick={() => handleOpen(borrow)}>Detail</Button></TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
