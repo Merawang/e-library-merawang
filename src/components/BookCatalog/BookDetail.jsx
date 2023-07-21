@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, useState } from 'react';
 
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -8,6 +8,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContentText from '@mui/material/DialogContentText';
 import Grow from '@mui/material/Grow';
 import Chip from '@mui/material/Chip';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import DoneIcon from '@mui/icons-material/Done';
 import BlockIcon from '@mui/icons-material/Block';
@@ -18,6 +19,7 @@ import useDelete from '../../hooks/useDelete';
 
 import { useDisplayContext } from '@/hooks/context/useDisplayContext';
 import { useBookContext } from '@/hooks/context/useBookContext';
+import useRead from '@/hooks/useRead';
 
 
 const Transition = forwardRef(function Transition(props, ref) {
@@ -29,13 +31,20 @@ const BookDetail = ({ book, isOpen, handleClose }) => {
 
     const baseurl = `${import.meta.env.VITE_BACKEND_BASEURL}/api/books`;
     const { dispatch } = useBookContext();
-    const { setLoading, setMessage } = useDisplayContext();
+    const { isPending, setLoading, setMessage } = useDisplayContext();
 
     const { handleDelete } = useDelete({ url: baseurl, dispatch, type: 'deleted_book', setMessage, setLoading })
 
     const handleSubmit = (e, id, title) => {
         handleDelete(e, id, title);
         handleClose();
+    }
+
+    const handleRead = async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        useRead({ url: `${baseurl}/search?q=${book?.isbn}`, setLoading, setMessage });
     }
 
     const isLoggedIn = () => {
@@ -100,7 +109,7 @@ const BookDetail = ({ book, isOpen, handleClose }) => {
             </DialogContent>
             <DialogActions>
                 <Button color='mainBlue' variant='text' sx={{ m: 1 }} onClick={handleClose}>Tutup</Button>
-                <Button color='mainBlue' endIcon={<GoogleIcon color='' size='small' />} variant={isLoggedIn() ? 'outlined' : 'contained'} sx={{ m: 1 }}>Baca Google Books</Button>
+                <Button color='mainBlue' endIcon={<GoogleIcon color='' size='small' />} variant={isLoggedIn() ? 'outlined' : 'contained'} sx={{ m: 1 }} onClick={(e) => handleRead(e)}>{isPending ? <CircularProgress size={20} /> : 'Baca Google Books'}</Button>
                 {isLoggedIn() && <Button color='mainBlue' variant='contained' sx={{ m: 1 }}>Pinjam</Button>}
             </DialogActions>
         </Dialog>
