@@ -64,7 +64,7 @@ const BorrowedBooks = () => {
         </Helmet>
         <div className="main">
             <h1 className="font-bold text-2xl text-blue-600 sticky bg-white top-0">Peminjaman Buku</h1>
-            <div className="search-wrapper flex pt-8 mb-5 sticky w-full top-12 z-50 bg-white">
+            <div className="search-wrapper flex pt-8 mb-5 sticky w-full top-12 z-40 bg-white">
                 <div className="change-view mr-2">
                     <FormControl sx={{ my: 1, minWidth: 80 }} size="small">
                         <InputLabel id="demo-select-small-label">View</InputLabel>

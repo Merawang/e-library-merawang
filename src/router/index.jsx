@@ -19,9 +19,8 @@ import {
 
 const isLoggedIn = () => {
 
-    // Auth logic..
-
-    return true;
+    const user = JSON.parse(sessionStorage.getItem('user'));
+    return !!user
 }
 
 const router = createBrowserRouter(createRoutesFromElements(

@@ -1,18 +1,20 @@
+import { NavLink } from 'react-router-dom';
+
 import TimelineIcon from '@mui/icons-material/Timeline';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import BookIcon from '@mui/icons-material/Book';
 import InfoIcon from '@mui/icons-material/Info';
 import PersonIcon from '@mui/icons-material/Person';
 import LoginIcon from '@mui/icons-material/Login';
-import { NavLink } from 'react-router-dom';
 
 
-const Navbar = ({ children }) => {
+const Navbar = ({ }) => {
 
-    const username = "SeterangMerawang";
+    const user = JSON.parse(sessionStorage.getItem('user'));
+    const username = user?.name || 'Pengguna';
 
     const isLoggedIn = () => {
-        return true;
+        return !!user
     }
 
     return (<>

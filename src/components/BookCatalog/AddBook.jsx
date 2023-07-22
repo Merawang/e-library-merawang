@@ -260,7 +260,19 @@ const AddBook = ({ isOpen, handleClose }) => {
                 </DialogContent>
                 <DialogActions>
                     <Button color='mainBlue' variant='text' sx={{ m: 1 }} onClick={handleClose}>Tutup</Button>
-                    <Button color='mainBlue' endIcon={<QrCode2Icon color='' size='small' />} variant='outlined' sx={{ m: 1 }} onClick={() => setISBNIsOpen(true)}>Scan ISBN</Button>
+                    <Button color='mainBlue' variant='text' sx={{ m: 1 }} onClick={() => handleFill({
+                        title: '',
+                        authors: [],
+                        publicationDate: '12-12-2020',
+                        publisher: '',
+                        isbn: '',
+                        subjects: [],
+                        ddc: '',
+                        pageCount: 0,
+                        description: '',
+                        imageUrl: 'https://www.hachette.co.nz/graphics/CoverNotAvailable.jpg'
+                    })}>Clear</Button>
+                    <Button color='mainBlue' endIcon={<QrCode2Icon color='' size='small' />} variant='outlined' sx={{ m: 1 }} onClick={() => setISBNIsOpen(true)}>Cari Buku</Button>
                     <Button color='mainBlue' disabled={isPending} type='submit' variant='contained' sx={{ m: 1 }} onClick={(e) => handleSubmit(e, newBook)}>{isPending ? <CircularProgress color='inherit' size={20} /> : 'Tambah'}</Button>
                 </DialogActions>
             </form>

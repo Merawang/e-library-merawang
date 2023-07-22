@@ -50,7 +50,7 @@ const BookCatalog = () => {
 
         <div className="main">
             <h1 className="font-bold text-2xl text-blue-600 sticky bg-white top-0">Katalog Buku</h1>
-            <div className="search-wrapper pt-8 mb-5 sticky top-12 z-50 bg-white">
+            <div className="search-wrapper pt-8 mb-5 sticky top-12 z-40 bg-white">
                 <SearchBox
                     placeholder={'Cari buku kesukaanmu di sini..'}
                     searchText={searchText}

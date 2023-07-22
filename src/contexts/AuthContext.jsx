@@ -4,11 +4,11 @@ export const AuthContext = createContext();
 
 export const authReducer = (state, action) => {
     switch (action.type) {
-        case 'LOGIN':
+        case 'signin':
             return {
                 user: action.payload
             }
-        case 'LOGOUT':
+        case 'signout':
             return {
                 user: null
             }
@@ -22,12 +22,9 @@ const AuthContextProvider = ({ children }) => {
         user: null
     });
 
-    // method to check whether user has already stored in localStorage or not
-    // if yes, use it instead of re-login through login form
-
     useEffect(() => {
-        const user = JSON.parse(localStorage.getItem('user'));
-        if (user) dispatch({ type: 'LOGIN', payload: user });
+        const user = JSON.parse(sessionStorage.getItem('user'));
+        if (user) dispatch({ type: 'signin', payload: user });
     }, []);
 
     return (

@@ -48,7 +48,7 @@ const BookDetail = ({ book, isOpen, handleClose }) => {
     }
 
     const isLoggedIn = () => {
-        return true
+        return false
     }
 
     return (<>
@@ -109,7 +109,7 @@ const BookDetail = ({ book, isOpen, handleClose }) => {
             </DialogContent>
             <DialogActions>
                 <Button color='mainBlue' variant='text' sx={{ m: 1 }} onClick={handleClose}>Tutup</Button>
-                <Button color='mainBlue' endIcon={<GoogleIcon color='' size='small' />} variant={isLoggedIn() ? 'outlined' : 'contained'} sx={{ m: 1 }} onClick={(e) => handleRead(e)}>{isPending ? <CircularProgress size={20} /> : 'Baca Google Books'}</Button>
+                <Button color='mainBlue' endIcon={<GoogleIcon color='' size='small' />} variant={isLoggedIn() ? 'outlined' : 'contained'} sx={{ m: 1 }} onClick={(e) => handleRead(e)}>{isPending ? <CircularProgress color='inherit' size={20} /> : 'Baca Google Books'}</Button>
                 {isLoggedIn() && <Button color='mainBlue' variant='contained' sx={{ m: 1 }}>Pinjam</Button>}
             </DialogActions>
         </Dialog>
