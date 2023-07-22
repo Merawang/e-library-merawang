@@ -4,15 +4,15 @@ const useAdd = ({ url, dispatch, type, setMessage, setLoading }) => {
     const add = async (payload) => {
         setLoading(true);
         try {
-            console.log(payload)
             const response = await axios.post(url, payload)
 
-            console.log(response.data.data)
-            dispatch({ type, payload: response.data.data });
+            // console.log(payload)
+
+            dispatch({ type, payload: response?.data?.data });
             setMessage({ error: false, severity: 'success', message: `Sukses melakukan tambah data` })
         }
         catch (error) {
-            const errorMessage = error.response.data.error || error.message || 'Terjadi kesalahan pada server'
+            const errorMessage = error?.response?.data?.error || error.message || 'Terjadi kesalahan pada server'
             alert(errorMessage);
             console.error(error);
 
@@ -27,7 +27,7 @@ const useAdd = ({ url, dispatch, type, setMessage, setLoading }) => {
         e.stopPropagation();
         e.preventDefault();
 
-        if (payload) {
+        if (!!Object.keys(payload).length) {
             await add(payload)
         }
 

@@ -83,11 +83,11 @@ const BookDetail = ({ book, isOpen, handleClose }) => {
                     </div>
                     <div className="content-right basis-2/3 h-full text-base overflow-y-auto">
                         <div className="detail-info mb-5">
-                            <p id='author'><span className='font-bold'>Penulis:</span> {book.authors && book?.authors.map((author, i, arr) => {
+                            <p id='authors'><span className='font-bold'>Penulis:</span> {book.authors && book?.authors.map((author, i, arr) => {
                                 return (arr.length - 1 !== i) ? `${author}, ` : `${author}`
                             })} </p>
                             <p id="publisher"><span className='font-bold'>Publisher:</span> {book?.publisher}</p>
-                            <p id="publicationDate"><span className='font-bold'>Tanggal Publikasi:</span> {book?.publicationDate}</p>
+                            <p id="publicationDate"><span className='font-bold'>Tanggal Publikasi:</span> {book?.publicationDate?.split('T')[0]}</p>
                             <p id="isbn"><span className='font-bold'>ISBN:</span> {book?.isbn}</p>
                             <p id="ddc"><span className='font-bold'>DDC:</span> {book?.ddc}</p>
                             <p id="lcc"><span className='font-bold'>LCC:</span> {book?.lcc}</p>

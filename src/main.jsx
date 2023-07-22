@@ -33,8 +33,8 @@ const theme = createTheme({
 
 // Axios Default Config
 const accessToken = import.meta.env.VITE_BEARERTOKEN;
-axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
-axios.defaults.headers.common['Accept'] = `application/json`;
+// axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+// axios.defaults.headers.common['Accept'] = `application/json`;
 axios.defaults.headers.common['Content-Type'] = `application/json`;
 
 ReactDOM.createRoot(document.getElementById('root')).render(

@@ -50,7 +50,7 @@ const BookCatalog = () => {
 
         <div className="main">
             <h1 className="font-bold text-2xl text-blue-600 sticky bg-white top-0">Katalog Buku</h1>
-            <div className="search-wrapper pt-8 mb-5 sticky top-12 bg-white">
+            <div className="search-wrapper pt-8 mb-5 sticky top-12 z-50 bg-white">
                 <SearchBox
                     placeholder={'Cari buku kesukaanmu di sini..'}
                     searchText={searchText}
@@ -66,7 +66,7 @@ const BookCatalog = () => {
                 }
             </div>
             {/* <div className="card-wrapper grid grid-flow-row-dense grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 "> */}
-            <div className="card-wrapper columns-5 gap-6">
+            <div className="card-wrapper columns-xs gap-6">
                 {!filteredBooks.length && (isPending ? <CardLoading /> : <NoBook handleOpen={handleOpen} />)}
                 {!!filteredBooks.length && filteredBooks?.map((book, i) => {
                     return (

@@ -32,7 +32,7 @@ const BorrowedBooksTable = ({ borrows, isOpen, handleOpen, handleClose, setBorro
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                             <TableCell component="th" scope="borrow">
-                                {borrow?.books?.title}
+                                {borrow?.books?.title || '~Buku sudah dihapus~'}
                             </TableCell>
                             <TableCell align="left">{borrow?.borrowedBy?.name}</TableCell>
                             <TableCell align="left">{borrow?.borrowedBy?.address}</TableCell>

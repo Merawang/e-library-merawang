@@ -10,15 +10,17 @@ const useFetch = ({ url, dispatch, type, setLoading, setMessage }) => {
                 try {
                     const response = await axios.get(url);
 
-                    // console.log(response);
-
                     dispatch({ type, payload: response.data.data });
                     setMessage({ error: false, severity: 'success', message: `Sukses melakukan fetch data` })
 
                 }
                 catch (error) {
-                    alert(error.message);
-                    setMessage({ error: true, severity: 'error', message: error.message || `Terjadi kesalahan pada server` });
+                    const errorMessage = error?.response?.data?.error || error?.message || 'Terjadi kesalahan pada server'
+                    setMessage({ error: true, severity: 'error', message: errorMessage });
+
+                    alert(errorMessage);
+                    console.error(error);
+        
                 }
                 finally {
                     setLoading(false);

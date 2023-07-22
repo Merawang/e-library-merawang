@@ -1,24 +1,24 @@
 import { useEffect } from "react";
 import axios from "axios";
 
-const useRead = ({ url, setLoading, setMessage }) => {
+const useISBN = ({ url, isbn, setData, setLoading, setMessage }) => {
 
     (
         async () => {
             setLoading(true);
             try {
-                const response = await axios.get(url);
+                const response = await axios.get(`${url}/search?q=${isbn}`);
 
-                window.open(response?.data?.data?.items[0]?.volumeInfo?.previewLink, '_blank');
+                setData(response.data.data);
                 setMessage({ error: false, severity: 'success', message: `Sukses melakukan fetch data` })
 
             }
             catch (error) {
                 const errorMessage = error?.response?.data?.error || error.message || 'Terjadi kesalahan pada server'
+                setMessage({ error: true, severity: 'error', message: errorMessage });
+
                 alert(errorMessage);
                 console.error(error);
-    
-                setMessage({ error: true, severity: 'error', message: errorMessage });
             }
             finally {
                 setLoading(false);
@@ -28,4 +28,4 @@ const useRead = ({ url, setLoading, setMessage }) => {
 
 }
 
-export default useRead;
+export default useISBN;

@@ -5,6 +5,7 @@ import SearchBox from "@/components/Searchbox";
 import BookCard from "@/components/BookCatalog/BookCard";
 import BookDetail from "@/components/BookCatalog/BookDetail";
 import AddBook from "@/components/BookCatalog/AddBook";
+import AddISBN from "@/components/BookCatalog/AddISBN";
 import EditBook from "@/components/BookCatalog/EditBook";
 
 // Borrowed Books
@@ -24,6 +25,7 @@ export {
     BookCard,
     BookDetail,
     AddBook,
+    AddISBN,
     EditBook,
     BorrowedBooksCard,
     BorrowedBooksDetail,
