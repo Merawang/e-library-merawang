@@ -10,7 +10,7 @@ import ListSubheader from '@mui/material/ListSubheader';
 
 import SearchIcon from '@mui/icons-material/Search';
 
-const SearchBox = ({ placeholder, searchText, setSearchText, filter }) => {
+const SearchBox = ({ placeholder, searchText, setSearchText, selectedSort, selectedFilter, setSelectedFilter, setSelectedSort, filter }) => {
 
     const filterList = [
         {
@@ -34,21 +34,20 @@ const SearchBox = ({ placeholder, searchText, setSearchText, filter }) => {
         },
     ]
 
-    const [selectedFilter, setSelectedFilter] = useState('');
-    const [selectedSort, setSelectedSort] = useState('');
-
     const handleFilter = (event) => {
         setSelectedFilter(event.target.value);
     };
 
     const handleSort = (event) => {
-        setSelectedSort(event.target.value);
+        const value = event?.target?.value;
+        setSelectedSort(value);
+        filter(searchText, selectedSort);
     }
 
     const handleInputChange = (event) => {
-        const value = event.target.value;
+        const value = event?.target?.value;
         setSearchText(value);
-        filter(value);
+        filter(searchText, selectedSort);
     }
 
 
@@ -71,7 +70,7 @@ const SearchBox = ({ placeholder, searchText, setSearchText, filter }) => {
                     )
                 }}
             />
-            <div className="filter">
+            {/* <div className="filter">
                 <FormControl sx={{ my: 1, minWidth: 80 }} size="small">
                     <InputLabel id="demo-select-small-label">Filter</InputLabel>
                     <Select
@@ -79,7 +78,7 @@ const SearchBox = ({ placeholder, searchText, setSearchText, filter }) => {
                         id="demo-select-small"
                         value={selectedFilter}
                         label="Filter"
-                        onChange={handleFilter}
+                        onChange={(e) => handleFilter(e)}
                     >
                         <ListSubheader>Category</ListSubheader>
                         {!!filterList.length && filterList.map((item, i) => {
@@ -89,7 +88,7 @@ const SearchBox = ({ placeholder, searchText, setSearchText, filter }) => {
                         })}
                     </Select>
                 </FormControl>
-            </div>
+            </div> */}
             <div className="sort">
                 <FormControl sx={{ my: 1, minWidth: 80 }} size="small">
                     <InputLabel id="demo-select-small-label">Sort</InputLabel>
@@ -98,7 +97,7 @@ const SearchBox = ({ placeholder, searchText, setSearchText, filter }) => {
                         id="demo-select-small"
                         value={selectedSort}
                         label="Sort"
-                        onChange={handleSort}
+                        onChange={(e) => handleSort(e)}
                     >
                         {!!sortList.length && sortList.map((item, i) => {
                             return (

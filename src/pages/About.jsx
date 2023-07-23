@@ -10,7 +10,7 @@ const About = () => {
 
         <div className="main">
             <h1 className="font-bold text-2xl text-blue-600 mb-5">Tentang</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia sapiente ratione eveniet, officia odit maxime expedita, quam voluptates deleniti assumenda accusantium corporis tenetur corrupti aut maiores neque sequi fugiat itaque enim quia commodi. Voluptatum in, quod tempora voluptate est placeat esse libero quaerat illum impedit obcaecati rem modi consequuntur blanditiis.</p>
+            <p>Dikembangkan sepenuh hati oleh Tim KKN PPN UGM Merawang 💖</p>
         </div>
     </>);
 }

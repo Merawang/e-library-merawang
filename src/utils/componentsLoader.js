@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import SearchBox from "@/components/Searchbox";
 
 // Book Catalog
@@ -21,6 +22,7 @@ import NoBook from "@/components/Exception/NoBook";
 
 export {
     Navbar,
+    Footer,
     SearchBox,
     BookCard,
     BookDetail,

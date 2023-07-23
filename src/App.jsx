@@ -1,6 +1,7 @@
 // Components
-import { Navbar } from '@/utils/componentsLoader';
+import { Navbar, Footer } from '@/utils/componentsLoader';
 import { Outlet } from 'react-router-dom';
+import Divider from '@mui/material/Divider';
 
 function App() {
 
@@ -11,6 +12,8 @@ function App() {
         <div className="main-section px-6 pt-32 pb-16">
           <Outlet />
         </div>
+        <Divider variant="middle" />
+        <Footer />
       </div>
     </>
   )

@@ -8,6 +8,11 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle'
 
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import Groups3Icon from '@mui/icons-material/Groups3';
+import MobileFriendlyIcon from '@mui/icons-material/MobileFriendly';
+
 const Home = () => {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -29,9 +34,34 @@ const Home = () => {
             <link rel="canonical" href="http://127.0.0.1:5173/" />
         </Helmet>
 
-        <h1 className="text-black font-bold text-2xl mb-5">Selamat Datang, <span className='text-blue-600'>{username}</span></h1>
-        <div className="md:flex md:justify-center">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti adipisci suscipit est, unde deleniti quaerat assumenda molestiae exercitationem corporis! Autem voluptatum nobis officiis iusto atque, eligendi dolores enim praesentium. Facilis aperiam excepturi veritatis, at quae minima ipsam, voluptates asperiores atque eius quam sunt illo quidem qui? Non quisquam debitis assumenda officia pariatur quia, tenetur eveniet laboriosam nobis error explicabo voluptatem eum optio aut, consequatur aperiam? Et voluptates possimus, id ducimus reiciendis sit officiis iste aut sint nesciunt blanditiis repellendus laboriosam placeat ad nobis iure excepturi dolorum. Possimus repellat quibusdam, recusandae qui necessitatibus quisquam commodi beatae reiciendis ratione quos pariatur unde molestias? Fuga quibusdam eius dolorum vel ea optio adipisci similique ducimus, dicta, tempore pariatur distinctio voluptate qui dolores, voluptatum a enim. Sed magni tenetur labore, consequatur non quidem suscipit eum deserunt, voluptate praesentium perferendis pariatur, quia fuga modi? Aliquid autem, a excepturi soluta nostrum consectetur ducimus quod, cumque quas amet ipsam cum libero ab esse architecto doloremque fuga error ipsum quibusdam magni quasi. Perspiciatis suscipit odio fugit. Autem tempore temporibus necessitatibus ipsa sint consectetur impedit, alias dolores nobis officiis ipsum maxime quisquam distinctio quia nisi sapiente quibusdam nesciunt, sit laudantium laboriosam molestias eos minima. Cumque veniam voluptates beatae culpa rerum.
+        <h1 className="text-black font-bold text-2xl mb-5">Selamat Datang, <span className='text-blue-600'>{username}!</span></h1>
+        <div className="intro">
+            Di tengah kemajuan teknologi dan kebutuhan akan informasi yang semakin meningkat, kami dengan bangga mempersembahkan <span className='font-bold inline'>E-Library Seterang Merawang</span>, sebuah perpustakaan digital yang berdedikasi untuk membawa wawasan dan pengetahuan kepada seluruh warga Desa Kimak.
+        </div>
+        <div className="feature mt-5">
+            <h2 className='font-semibold text-xl mb-5' >Apa saja yang bisa dilakukan <span className='font-bold inline'>E-Library Seterang Merawang</span>?</h2>
+            <div className="cards flex w-full gap-6">
+                <div className='card basis-1/4 p-5 flex flex-col outline outline-1 outline-gray-200 shadow-md rounded justify-center items-center transition-all group hover:bg-blue-600'>
+                    <h4 className='font-bold text-xl mb-2 group-hover:text-white'>Akses 24/7</h4>
+                    <AccessTimeIcon className='mb-2 text-blue-600 group-hover:text-white' sx={{ fontSize: 50 }} />
+                    <p className='text-center group-hover:text-white'>Nikmati akses ke perpustakaan digital kami kapan pun dan di mana pun Anda berada.</p>
+                </div>
+                <div className='card basis-1/4 p-5 flex flex-col outline outline-1 outline-gray-200 shadow-md rounded justify-center items-center transition-all group hover:bg-blue-600'>
+                    <h4 className='font-bold text-xl mb-2 group-hover:text-white'>Koleksi Beragam</h4>
+                    <MenuBookIcon className='mb-2 text-blue-600 group-hover:text-white' sx={{ fontSize: 50 }} />
+                    <p className='text-center group-hover:text-white'>Kumpulan buku digital kami terus berkembang dan beragam.</p>
+                </div>
+                <div className='card basis-1/4 p-5 flex flex-col outline outline-1 outline-gray-200 shadow-md rounded justify-center items-center transition-all group hover:bg-blue-600'>
+                    <h4 className='font-bold italic text-xl mb-2 group-hover:text-white'>User-friendly</h4>
+                    <Groups3Icon className='mb-2 text-blue-600 group-hover:text-white' sx={{ fontSize: 50 }} />
+                    <p className='text-center group-hover:text-white'>Dirancang agar mudah digunakan oleh siapa pun.</p>
+                </div>
+                <div className='card basis-1/4 p-5 flex flex-col outline outline-1 outline-gray-200 shadow-md rounded justify-center items-center transition-all group hover:bg-blue-600'>
+                    <h4 className='font-bold italic text-xl mb-2 group-hover:text-white'>Multi-platform</h4>
+                    <MobileFriendlyIcon className='mb-2 text-blue-600 group-hover:text-white' sx={{ fontSize: 50 }} />
+                    <p className='text-center group-hover:text-white'>Dapat diakses di berbagai perangkat yang Anda miliki.</p>
+                </div>
+            </div>
         </div>
         <div className="text-center mt-24 font-semibold underline text-gray-400">
             <button className='underline' onClick={handleOpen}>Cara Penggunaan 🛈</button>
@@ -46,7 +76,7 @@ const Home = () => {
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ex iusto aliquam repudiandae ea ipsa vero nisi tempore assumenda, eaque perspiciatis.
+                        Bukalah Katalog Buku untuk melihat buku favorit kamu. Apabila penasaran lebih lanjut, kamu dapat klik <span>Baca Google Books</span> untuk membaca buku secara lebih lengkap, dengan catatan hanya beberapa buku saja yang dapat diakses full.
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>

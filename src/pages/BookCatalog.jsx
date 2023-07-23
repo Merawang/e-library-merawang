@@ -16,6 +16,9 @@ const BookCatalog = () => {
     const baseurl = `${import.meta.env.VITE_BACKEND_BASEURL}/api/books`;
     const { books, dispatch } = useBookContext();
     const { isPending, setLoading, message, setMessage } = useDisplayContext();
+
+    const [selectedFilter, setSelectedFilter] = useState('');
+    const [selectedSort, setSelectedSort] = useState('');
     const [isOpen, setOpen] = useState(false);
 
     useFetch({ url: baseurl, dispatch, type: 'get_books', setLoading, setMessage });
@@ -28,18 +31,38 @@ const BookCatalog = () => {
         setOpen(false);
     };
 
-    // Searching
+    // Searching and Sorting
     const [searchText, setSearchText] = useState('')
     const [filteredBooks, setFilteredBooks] = useState([]);
     useEffect(() => setFilteredBooks(books), [books]);
 
-    const filter = (value) => {
-        const filtered = books?.filter((item) =>
+    const sortBooks = (key, data) => {
+        if (key === 'nameAsc') {
+            return data.sort((a, b) => b.title.toLowerCase().localeCompare(a.title.toLowerCase()));
+        }
+        else if (key === 'nameDesc') {
+            return data.sort((a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase()));
+        }
+        else {
+            return data
+        }
+    }
+
+    const filter = (value = searchText, sort = selectedSort) => {
+        let filtered = books?.filter((item) =>
             item?.title?.toLowerCase().includes(value.toLowerCase())
         );
 
+        if (selectedSort) {
+            filtered = sortBooks(sort, filtered);
+        }
+
         filtered[0] ? setFilteredBooks(filtered) : setFilteredBooks([]);
     }
+
+
+
+    // Auth check
 
     const isLoggedIn = () => {
         const user = JSON.parse(sessionStorage.getItem('user'));
@@ -61,6 +84,10 @@ const BookCatalog = () => {
                     searchText={searchText}
                     setSearchText={setSearchText}
                     filter={filter}
+                    selectedFilter={selectedFilter}
+                    setSelectedFilter={setSelectedFilter}
+                    selectedSort={selectedSort}
+                    setSelectedSort={setSelectedSort}
                 />
             </div>
             <div className="message">

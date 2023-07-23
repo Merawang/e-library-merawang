@@ -22,8 +22,8 @@ const Navbar = ({ }) => {
             <div className="container flex flex-row justify-between px-6 py-2">
                 <div className="content-left">
                     <NavLink to={'/'} className='flex flex-row justify-center items-center gap-2'>
-                        <TimelineIcon className='text-blue-600' sx={{ fontSize: '3em' }} />
-                        <h1 className="text-xl font-bold text-gray-800">Kimak E-Library</h1>
+                        <img src="logoKKNpng.png" alt="Logo KKN Seterang Merawang" width={50}/>
+                        <h1 className="text-xl font-bold text-gray-800">E-Library - <span className='text-blue-600'>SeterangMerawang</span></h1>
                     </NavLink>
                 </div>
                 <div className="content-right flex flex-row gap-4 justify-center items-center">
