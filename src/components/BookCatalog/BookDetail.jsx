@@ -48,7 +48,8 @@ const BookDetail = ({ book, isOpen, handleClose }) => {
     }
 
     const isLoggedIn = () => {
-        return false
+        const user = JSON.parse(sessionStorage.getItem('user'));
+        return !!user
     }
 
     return (<>
@@ -93,14 +94,17 @@ const BookDetail = ({ book, isOpen, handleClose }) => {
                             <p id="lcc"><span className='font-bold'>LCC:</span> {book?.lcc}</p>
                             <p id="pageCount"><span className='font-bold'>Jumlah Halaman:</span> {book?.pageCount}</p>
                         </div>
-                        <div className="button flex flex-row space-x-2 mb-5">
-                            <div className="edit-wrapper">
-                                <Button size='small' color='warning' variant='contained' endIcon={<EditIcon color='' size='small' />}>Edit</Button>
+                        {
+                            isLoggedIn() &&
+                            <div className="button flex flex-row space-x-2 mb-5">
+                                <div className="edit-wrapper">
+                                    <Button size='small' color='warning' variant='contained' endIcon={<EditIcon color='' size='small' />}>Edit</Button>
+                                </div>
+                                <div className="delete-wrapper">
+                                    <Button size='small' color='error' variant='contained' endIcon={<DeleteIcon color='' size='small' />} onClick={(e) => handleSubmit(e, book?._id, book?.title)}>Hapus</Button>
+                                </div>
                             </div>
-                            <div className="delete-wrapper">
-                                <Button size='small' color='error' variant='contained' endIcon={<DeleteIcon color='' size='small' />} onClick={(e) => handleSubmit(e, book?._id, book?.title)}>Hapus</Button>
-                            </div>
-                        </div>
+                        }
                         <DialogContentText>
                             {book?.description}
                         </DialogContentText>

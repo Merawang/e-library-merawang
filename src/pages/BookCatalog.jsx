@@ -41,6 +41,11 @@ const BookCatalog = () => {
         filtered[0] ? setFilteredBooks(filtered) : setFilteredBooks([]);
     }
 
+    const isLoggedIn = () => {
+        const user = JSON.parse(sessionStorage.getItem('user'));
+        return !!user
+    }
+
     return (<>
         <Helmet>
             <meta charSet="utf-8" />
@@ -74,17 +79,21 @@ const BookCatalog = () => {
                     )
                 })}
             </div>
-            <Grow in={true} >
-                <div className="button-wrapper fixed right-0 bottom-0 m-6 z-10">
-                    <Fab variant="extended" color='mainBlue' aria-label="book-add" onClick={handleOpen}>
-                        <AddIcon sx={{ mr: 1 }} />
-                        Tambah buku
-                    </Fab>
+            {isLoggedIn() &&
+                <div className="add-book">
+                    <Grow in={true} >
+                        <div className="button-wrapper fixed right-0 bottom-0 m-6 z-10">
+                            <Fab variant="extended" color='mainBlue' aria-label="book-add" onClick={handleOpen}>
+                                <AddIcon sx={{ mr: 1 }} />
+                                Tambah buku
+                            </Fab>
+                        </div>
+                    </Grow>
+                    <div className="add-book-wrapper w-full">
+                        <AddBook isOpen={isOpen} handleClose={handleClose} />
+                    </div>
                 </div>
-            </Grow>
-            <div className="add-book-wrapper w-full">
-                <AddBook isOpen={isOpen} handleClose={handleClose} />
-            </div>
+            }
         </div>
     </>);
 }
