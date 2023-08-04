@@ -39,8 +39,9 @@ const EditBook = ({ isOpen, handleClose, book }) => {
     const [pageCount, setPageCount] = useState(book?.pageCount);
     const [description, setDescription] = useState(book?.description);
     const [imageUrl, setImageUrl] = useState(book?.imageUrl);
+    const [stock, setStock] = useState(book?.stock);
 
-    const editedBook = { title, authors, publicationDate, publisher, isbn, subjects, ddc, pageCount, description, imageUrl };
+    const editedBook = { title, authors, publicationDate, publisher, isbn, subjects, ddc, pageCount, description, imageUrl, stock };
 
     // Handle Edit
     const { handleEdit } = useEdit({ url: baseurl, dispatch, type: 'changed_book', setMessage, setLoading });
@@ -51,7 +52,7 @@ const EditBook = ({ isOpen, handleClose, book }) => {
         !isPending && handleClose();
     }
 
-    const handleFill = ({ title, authors, publicationDate, publisher, isbn, subjects, ddc, pageCount, description, imageUrl }) => {
+    const handleFill = ({ title, authors, publicationDate, publisher, isbn, subjects, ddc, pageCount, description, imageUrl, stock }) => {
         setTitle(title);
         setAuthors(authors);
         setPublicationDate(publicationDate);
@@ -62,6 +63,7 @@ const EditBook = ({ isOpen, handleClose, book }) => {
         setPageCount(pageCount);
         setDescription(description);
         setImageUrl(imageUrl);
+        setStock(stock);
     };
 
     return (<>
@@ -248,6 +250,19 @@ const EditBook = ({ isOpen, handleClose, book }) => {
                                 type='file'
                                 InputLabelProps={{ shrink: true }}
                             /> */}
+                            <TextField
+                                fullWidth
+                                required
+                                onChange={(e) => setStock(e.target.value)}
+                                value={stock}
+                                label="Stok"
+                                placeholder='Contoh: 2'
+                                id="stock"
+                                margin='dense'
+                                size='small'
+                                InputLabelProps={{ shrink: true }}
+                                type='number'
+                            />
                         </div>
                     </div>
                 </DialogContent>

@@ -35,12 +35,11 @@ const BookCard = ({ book }) => {
                     title={book?.title}
                 />
                 <div className="status-tags ml-3 mt-3">
-                    {book?.isAvailable ?
+                    {!!book?.stock ?
                         <Chip size='small' icon={<DoneIcon />} color="success" label={`Tersedia (${book?.stock})`} className='shadow' />
                         :
                         <Chip size='small' icon={<BlockIcon />} color="warning" label="Stok buku habis" className='shadow' />
                     }
-
                 </div>
                 <CardContent>
                     <h5 className='text-xl font-bold mb-2'>{book?.title}</h5>

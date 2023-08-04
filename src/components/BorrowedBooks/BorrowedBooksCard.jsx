@@ -9,17 +9,18 @@ import Button from '@mui/material/Button';
 const BorrowedBooksCard = ({ borrow, isOpen, handleOpen, handleClose }) => {
 
     return (<>
-
         <div className='card mb-12'>
             <Card>
-                <CardMedia
-                    component="img"
-                    sx={{ minHeight: 100 }}
-                    image={borrow?.books.imageUrl}
-                    title={borrow?.books.title}
-                />
+                {borrow?.books?.imageUrl &&
+                    <CardMedia
+                        component="img"
+                        sx={{ minHeight: 100 }}
+                        image={borrow?.books?.imageUrl}
+                        title={borrow?.books?.title}
+                    />
+                }
                 <CardContent>
-                    <p className='text-xl font-bold mb-2'>{borrow?.books.title}</p>
+                    <p className='text-xl font-bold mb-2'>{borrow?.books?.title}</p>
                     <div className="borrowedBy">
                         <p className='text-gray-500'><span className='font-bold ' >Dipinjam oleh: </span>{borrow?.borrowedBy?.name}</p>
                     </div>

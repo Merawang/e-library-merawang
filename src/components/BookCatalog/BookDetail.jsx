@@ -35,7 +35,9 @@ const BookDetail = ({ book, isOpen, handleClose }) => {
     const { dispatch } = useBookContext();
     const { isPending, setLoading, setMessage } = useDisplayContext();
 
-    const { handleDelete } = useDelete({ url: baseurl, dispatch, type: 'deleted_book', setMessage, setLoading })
+    // Delete
+    
+    const { handleDelete } = useDelete({ url: baseurl, dispatch, type: 'deleted_book', setMessage, setLoading });
 
     const handleSubmit = (e, id, title) => {
         handleDelete(e, id, title);
@@ -89,7 +91,7 @@ const BookDetail = ({ book, isOpen, handleClose }) => {
                         <img src={book?.imageUrl} alt={book?.title} loading='lazy' className='w-full' />
                         <div className="flex flex-row gap-2 mt-2 status-tags absolute">
                             <p>Status: </p>
-                            {book?.isAvailable ?
+                            {!!book?.stock ?
                                 <Chip size='small' icon={<DoneIcon />} color="success" label={`Tersedia (${book?.stock})`} className='shadow' />
                                 :
                                 <Chip size='small' icon={<BlockIcon />} color="warning" label="Stok habis" className='shadow' />

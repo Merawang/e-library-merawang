@@ -40,6 +40,9 @@ const BorrowedBooks = () => {
     useFetch({ url: baseurl, dispatch, type: 'get_borrows', setLoading, setMessage });
 
     // Searching
+    const [selectedFilter, setSelectedFilter] = useState('');
+    const [selectedSort, setSelectedSort] = useState('');
+
     const [searchText, setSearchText] = useState('')
     const [filteredBorrows, setFilteredBorrows] = useState([]);
     useEffect(() => setFilteredBorrows(borrows), [borrows]);
@@ -89,6 +92,10 @@ const BorrowedBooks = () => {
                         searchText={searchText}
                         setSearchText={setSearchText}
                         filter={filter}
+                        selectedFilter={selectedFilter}
+                        setSelectedFilter={setSelectedFilter}
+                        selectedSort={selectedSort}
+                        setSelectedSort={setSelectedSort}
                     />
                 </div>
             </div>

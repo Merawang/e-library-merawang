@@ -26,7 +26,7 @@ const BorrowedBooksTable = ({ borrows, isOpen, handleOpen, handleClose, setBorro
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {borrows.map((borrow) => (
+                    {borrows?.map((borrow) => (
                         <TableRow
                             key={borrow?._id}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}

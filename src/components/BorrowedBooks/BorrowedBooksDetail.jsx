@@ -5,12 +5,15 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import DialogContentText from '@mui/material/DialogContentText';
 import Grow from '@mui/material/Grow';
 import Chip from '@mui/material/Chip';
 
 import DoneIcon from '@mui/icons-material/Done';
 import BlockIcon from '@mui/icons-material/Block';
+
+import { useBorrowContext } from '@/hooks/context/useBorrowContext';
+import { useDisplayContext } from '@/hooks/context/useDisplayContext';
+import useDelete from '@/hooks/useDelete';
 
 
 const Transition = forwardRef(function Transition(props, ref) {
@@ -20,8 +23,17 @@ const Transition = forwardRef(function Transition(props, ref) {
 
 const BorrowedBooksDetail = ({ borrow, isOpen, handleClose }) => {
 
-    const isLoggedIn = () => {
-        return true
+    const baseurl = `${import.meta.env.VITE_BACKEND_BASEURL}/api/borrows`;
+    const { dispatch } = useBorrowContext();
+    const { isPending, message, setLoading, setMessage } = useDisplayContext();
+
+
+    // Delete
+    const { handleDelete } = useDelete({ url: baseurl, dispatch, type: 'deleted_borrow', setMessage, setLoading });
+
+    const handleSubmit = (e, id, title) => {
+        handleDelete(e, id, title);
+        handleClose();
     }
 
     return (<>
@@ -34,13 +46,20 @@ const BorrowedBooksDetail = ({ borrow, isOpen, handleClose }) => {
             <DialogTitle>
                 <p className="font-bold mb-2">{borrow?.books?.title}</p>
                 <div className="category-tags flex flex-row gap-1 mb-2">
-                    {borrow.books?.subjects && borrow?.books?.subjects.map((subject, i) => {
+                    {borrow?.books?.subjects && borrow?.books?.subjects.map((subject, i) => {
                         return (<Chip size='small' label={subject} key={i} />)
                     })}
                 </div>
             </DialogTitle>
 
             <DialogContent>
+                <div className="message">
+                    {message.error &&
+                        <Alert variant="filled" className="mb-5" severity={message.severity}>
+                            {message.message}
+                        </Alert>
+                    }
+                </div>
                 <div className="wrapper flex flex-row gap-4">
                     <div className="image basis-1/3 w-96">
                         <img src={borrow?.books?.imageUrl} alt={borrow?.books?.title} loading='lazy' className='w-full' />
@@ -76,7 +95,7 @@ const BorrowedBooksDetail = ({ borrow, isOpen, handleClose }) => {
             </DialogContent>
             <DialogActions>
                 <Button color='mainBlue' variant='text' sx={{ m: 1 }} onClick={handleClose}>Tutup</Button>
-                <Button color='mainBlue' variant='contained' sx={{ m: 1 }} onClick={handleClose}>Kembalikan Buku</Button>
+                <Button color='mainBlue' variant='contained' sx={{ m: 1 }} onClick={(e) => handleSubmit(e, borrow?._id,  `Apakah anda yakin ingin mengembalikan ${borrow?.books?.title} a.n. ${borrow?.borrowedBy?.name}?`)}>Kembalikan Buku</Button>
             </DialogActions>
         </Dialog>
     </>);

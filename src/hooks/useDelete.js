@@ -25,7 +25,7 @@ const useDelete = ({ url, dispatch, type, setMessage, setLoading }) => {
         e.stopPropagation();
         e.preventDefault();
 
-        if (window.confirm(`Apakah kamu yakin ingin menghapus ${title}?`)) {
+        if (window.confirm(title)) {
             await remove(id);
         }
 
