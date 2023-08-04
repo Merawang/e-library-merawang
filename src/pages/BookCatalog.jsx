@@ -60,8 +60,6 @@ const BookCatalog = () => {
         filtered[0] ? setFilteredBooks(filtered) : setFilteredBooks([]);
     }
 
-
-
     // Auth check
 
     const isLoggedIn = () => {
@@ -72,7 +70,7 @@ const BookCatalog = () => {
     return (<>
         <Helmet>
             <meta charSet="utf-8" />
-            <title>Katalog Buku - Kimak E-Library</title>
+            <title>Katalog Buku - E-Library Desa Kimak</title>
             <link rel="canonical" href="http://127.0.0.1:5173/" />
         </Helmet>
 

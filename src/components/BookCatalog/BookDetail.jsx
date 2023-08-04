@@ -15,11 +15,13 @@ import BlockIcon from '@mui/icons-material/Block';
 import GoogleIcon from '@mui/icons-material/Google';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import useDelete from '../../hooks/useDelete';
 
 import { useDisplayContext } from '@/hooks/context/useDisplayContext';
 import { useBookContext } from '@/hooks/context/useBookContext';
 import useRead from '@/hooks/useRead';
+import useDelete from '@/hooks/useDelete';
+
+import { EditBook } from '@/utils/componentsLoader';
 
 
 const Transition = forwardRef(function Transition(props, ref) {
@@ -52,7 +54,20 @@ const BookDetail = ({ book, isOpen, handleClose }) => {
         return !!user
     }
 
+    // Edit Book
+
+    const [isEditOpen, setIsEditOpen] = useState(false);
+
+    const handleEditOpen = () => {
+        setIsEditOpen(true);
+    }
+
+    const handleEditClose = () => {
+        setIsEditOpen(false);
+    }
+
     return (<>
+        <EditBook book={book} isOpen={isEditOpen} handleClose={handleEditClose} />
         <Dialog
             open={isOpen}
             TransitionComponent={Transition}
@@ -98,10 +113,10 @@ const BookDetail = ({ book, isOpen, handleClose }) => {
                             isLoggedIn() &&
                             <div className="button flex flex-row space-x-2 mb-5">
                                 <div className="edit-wrapper">
-                                    <Button size='small' color='warning' variant='contained' endIcon={<EditIcon color='' size='small' />}>Edit</Button>
+                                    <Button disabled={isPending} size='small' color='warning' variant='contained' endIcon={<EditIcon color='' size='small' />} onClick={(e) => handleEditOpen()}>{isPending ? <CircularProgress color='inherit' size={20} /> : 'Edit'}</Button>
                                 </div>
                                 <div className="delete-wrapper">
-                                    <Button size='small' color='error' variant='contained' endIcon={<DeleteIcon color='' size='small' />} onClick={(e) => handleSubmit(e, book?._id, book?.title)}>Hapus</Button>
+                                    <Button disabled={isPending} size='small' color='error' variant='contained' endIcon={<DeleteIcon color='' size='small' />} onClick={(e) => handleSubmit(e, book?._id, book?.title)}>{isPending ? <CircularProgress color='inherit' size={20} /> : 'Hapus'}</Button>
                                 </div>
                             </div>
                         }
@@ -112,9 +127,9 @@ const BookDetail = ({ book, isOpen, handleClose }) => {
                 </div>
             </DialogContent>
             <DialogActions>
-                <Button color='mainBlue' variant='text' sx={{ m: 1 }} onClick={handleClose}>Tutup</Button>
-                <Button color='mainBlue' endIcon={<GoogleIcon color='' size='small' />} variant={isLoggedIn() ? 'outlined' : 'contained'} sx={{ m: 1 }} onClick={(e) => handleRead(e)}>{isPending ? <CircularProgress color='inherit' size={20} /> : 'Baca Google Books'}</Button>
-                {isLoggedIn() && <Button color='mainBlue' variant='contained' sx={{ m: 1 }}>Pinjam</Button>}
+                <Button disabled={isPending} color='mainBlue' variant='text' sx={{ m: 1 }} onClick={handleClose}>Tutup</Button>
+                <Button disabled={isPending} color='mainBlue' endIcon={<GoogleIcon color='' size='small' />} variant={isLoggedIn() ? 'outlined' : 'contained'} sx={{ m: 1 }} onClick={(e) => handleRead(e)}>{isPending ? <CircularProgress color='inherit' size={20} /> : 'Baca Google Books'}</Button>
+                {isLoggedIn() && <Button disabled={isPending} color='mainBlue' variant='contained' sx={{ m: 1 }}>Pinjam</Button>}
             </DialogActions>
         </Dialog>
     </>);

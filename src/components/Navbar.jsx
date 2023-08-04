@@ -23,7 +23,7 @@ const Navbar = ({ }) => {
                 <div className="content-left">
                     <NavLink to={'/'} className='flex flex-row justify-center items-center gap-2'>
                         <img src="logoKKNpng.png" alt="Logo KKN Seterang Merawang" width={50}/>
-                        <h1 className="text-xl font-bold text-gray-800">E-Library - <span className='text-blue-600'>SeterangMerawang</span></h1>
+                        <h1 className="text-xl font-bold text-gray-800">E-Library - <span className='text-blue-600'>Desa Kimak</span></h1>
                     </NavLink>
                 </div>
                 <div className="content-right flex flex-row gap-4 justify-center items-center">

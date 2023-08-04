@@ -50,7 +50,7 @@ const Login = () => {
     return (<>
         <Helmet>
             <meta charSet="utf-8" />
-            <title>Login - Kimak E-Library</title>
+            <title>Login - Peminjaman Buku</title>
             <link rel="canonical" href="http://127.0.0.1:5173/" />
         </Helmet>
 

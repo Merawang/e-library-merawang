@@ -50,7 +50,6 @@ const AddBook = ({ isOpen, handleClose }) => {
     const { handleAdd } = useAdd({ url: baseurl, dispatch, type: 'added_book', setMessage, setLoading });
 
     const handleSubmit = (e, payload) => {
-        console.log(payload)
         handleAdd(e, payload);
 
         !isPending && handleClose();

@@ -24,7 +24,7 @@ const Profile = () => {
     return (<>
         <Helmet>
             <meta charSet="utf-8" />
-            <title>Profile - Kimak E-Library</title>
+            <title>Profil - E-Library Desa Kimak</title>
             <link rel="canonical" href="http://127.0.0.1:5173/" />
         </Helmet>
 
