@@ -77,6 +77,8 @@ const Home = () => {
                 <DialogContent>
                     <DialogContentText>
                         Bukalah Katalog Buku untuk melihat buku favorit kamu. Apabila penasaran lebih lanjut, kamu dapat klik <span>Baca Google Books</span> untuk membaca buku secara lebih lengkap, dengan catatan hanya beberapa buku saja yang dapat diakses full.
+                        <br/><br/>
+                        Contact support: <a href="https://wa.me/6281393789949" className='underline text-blue-500'>@seterangmerawang</a>
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
