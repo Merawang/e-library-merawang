@@ -8,6 +8,7 @@ import BookDetail from "@/components/BookCatalog/BookDetail";
 import AddBook from "@/components/BookCatalog/AddBook";
 import AddISBN from "@/components/BookCatalog/AddISBN";
 import EditBook from "@/components/BookCatalog/EditBook";
+import AddBorrowedBook from "@/components/BookCatalog/AddBorrowedBook";
 
 // Borrowed Books
 import BorrowedBooksCard from "@/components/BorrowedBooks/BorrowedBooksCard";
@@ -29,6 +30,7 @@ export {
     AddBook,
     AddISBN,
     EditBook,
+    AddBorrowedBook,
     BorrowedBooksCard,
     BorrowedBooksDetail,
     BorrowedBooksTable,

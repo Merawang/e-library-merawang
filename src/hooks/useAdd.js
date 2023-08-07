@@ -4,9 +4,9 @@ const useAdd = ({ url, dispatch, type, setMessage, setLoading }) => {
     const add = async (payload) => {
         setLoading(true);
         try {
-            const response = await axios.post(url, payload)
+            const response = await axios.post(url, payload);
 
-            // console.log(payload)
+            console.log(response.data.data)
 
             dispatch({ type, payload: response?.data?.data });
             setMessage({ error: false, severity: 'success', message: `Sukses melakukan tambah data` })

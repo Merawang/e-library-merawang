@@ -36,12 +36,27 @@ const BookCatalog = () => {
     const [filteredBooks, setFilteredBooks] = useState([]);
     useEffect(() => setFilteredBooks(books), [books]);
 
+    const sortList = [
+        {
+            title: 'Nama (A-Z)',
+            value: 'nameAsc'
+        },
+        {
+            title: 'Nama (Z-A)',
+            value: 'nameDesc'
+        },
+        {
+            title: 'Stok',
+            value: 'stock'
+        },
+    ]
+
     const sortBooks = (key, data) => {
         if (key === 'nameAsc') {
-            return data.sort((a, b) => b.title.toLowerCase().localeCompare(a.title.toLowerCase()));
+            return data.sort((a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase()));
         }
         else if (key === 'nameDesc') {
-            return data.sort((a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase()));
+            return data.sort((a, b) => b.title.toLowerCase().localeCompare(a.title.toLowerCase()));
         }
         else {
             return data
@@ -80,12 +95,11 @@ const BookCatalog = () => {
                 <SearchBox
                     placeholder={'Cari buku kesukaanmu di sini..'}
                     searchText={searchText}
-                    setSearchText={setSearchText}
                     filter={filter}
                     selectedFilter={selectedFilter}
                     setSelectedFilter={setSelectedFilter}
                     selectedSort={selectedSort}
-                    setSelectedSort={setSelectedSort}
+                    sortList={sortList}
                 />
             </div>
             <div className="message">

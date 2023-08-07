@@ -21,7 +21,7 @@ import { useBookContext } from '@/hooks/context/useBookContext';
 import useRead from '@/hooks/useRead';
 import useDelete from '@/hooks/useDelete';
 
-import { EditBook } from '@/utils/componentsLoader';
+import { EditBook, AddBorrowedBook } from '@/utils/componentsLoader';
 
 
 const Transition = forwardRef(function Transition(props, ref) {
@@ -36,7 +36,7 @@ const BookDetail = ({ book, isOpen, handleClose }) => {
     const { isPending, setLoading, setMessage } = useDisplayContext();
 
     // Delete
-    
+
     const { handleDelete } = useDelete({ url: baseurl, dispatch, type: 'deleted_book', setMessage, setLoading });
 
     const handleSubmit = (e, id, title) => {
@@ -57,7 +57,6 @@ const BookDetail = ({ book, isOpen, handleClose }) => {
     }
 
     // Edit Book
-
     const [isEditOpen, setIsEditOpen] = useState(false);
 
     const handleEditOpen = () => {
@@ -68,8 +67,20 @@ const BookDetail = ({ book, isOpen, handleClose }) => {
         setIsEditOpen(false);
     }
 
+    // Borrow Book
+    const [isBorrowOpen, setIsBorrowOpen] = useState(false);
+
+    const handleBorrowOpen = () => {
+        setIsBorrowOpen(true);
+    }
+
+    const handleBorrowClose = () => {
+        setIsBorrowOpen(false);
+    }
+
     return (<>
         <EditBook book={book} isOpen={isEditOpen} handleClose={handleEditClose} />
+        <AddBorrowedBook book={book} isOpen={isBorrowOpen} handleClose={handleBorrowClose} />
         <Dialog
             open={isOpen}
             TransitionComponent={Transition}
@@ -118,7 +129,7 @@ const BookDetail = ({ book, isOpen, handleClose }) => {
                                     <Button disabled={isPending} size='small' color='warning' variant='contained' endIcon={<EditIcon color='' size='small' />} onClick={(e) => handleEditOpen()}>{isPending ? <CircularProgress color='inherit' size={20} /> : 'Edit'}</Button>
                                 </div>
                                 <div className="delete-wrapper">
-                                    <Button disabled={isPending} size='small' color='error' variant='contained' endIcon={<DeleteIcon color='' size='small' />} onClick={(e) => handleSubmit(e, book?._id, book?.title)}>{isPending ? <CircularProgress color='inherit' size={20} /> : 'Hapus'}</Button>
+                                    <Button disabled={isPending} size='small' color='error' variant='contained' endIcon={<DeleteIcon color='' size='small' />} onClick={(e) => handleSubmit(e, book?._id, `Apakah anda yakin ingin menghapus ${book?.title}`)}>{isPending ? <CircularProgress color='inherit' size={20} /> : 'Hapus'}</Button>
                                 </div>
                             </div>
                         }
@@ -131,7 +142,7 @@ const BookDetail = ({ book, isOpen, handleClose }) => {
             <DialogActions>
                 <Button disabled={isPending} color='mainBlue' variant='text' sx={{ m: 1 }} onClick={handleClose}>Tutup</Button>
                 <Button disabled={isPending} color='mainBlue' endIcon={<GoogleIcon color='' size='small' />} variant={isLoggedIn() ? 'outlined' : 'contained'} sx={{ m: 1 }} onClick={(e) => handleRead(e)}>{isPending ? <CircularProgress color='inherit' size={20} /> : 'Baca Google Books'}</Button>
-                {isLoggedIn() && <Button disabled={isPending} color='mainBlue' variant='contained' sx={{ m: 1 }}>Pinjam</Button>}
+                {isLoggedIn() && <Button disabled={isPending} color='mainBlue' variant='contained' sx={{ m: 1 }} onClick={handleBorrowOpen}>Pinjam</Button>}
             </DialogActions>
         </Dialog>
     </>);

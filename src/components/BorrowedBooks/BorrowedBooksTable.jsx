@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -8,11 +6,19 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
+import Skeleton from '@mui/material/Skeleton';
+import CircularProgress from '@mui/material/CircularProgress';
+
+import { useDisplayContext } from '@/hooks/context/useDisplayContext';
+
 
 const BorrowedBooksTable = ({ borrows, isOpen, handleOpen, handleClose, setBorrowDetail }) => {
 
+    const { isPending } = useDisplayContext();
+
     return (<>
         <TableContainer component={Paper}>
+
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                     <TableRow>
@@ -32,14 +38,14 @@ const BorrowedBooksTable = ({ borrows, isOpen, handleOpen, handleClose, setBorro
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                             <TableCell component="th" scope="borrow">
-                                {borrow?.books?.title || '~Buku sudah dihapus~'}
+                                {isPending ? <Skeleton variant="rounded" className='w-full' height={10} /> : borrow?.books?.title || '~Buku sudah dihapus~'}
                             </TableCell>
-                            <TableCell align="left">{borrow?.borrowedBy?.name}</TableCell>
-                            <TableCell align="left">{borrow?.borrowedBy?.address}</TableCell>
-                            <TableCell align="left">{borrow?.borrowedBy?.phoneNumber}</TableCell>
-                            <TableCell align="left">{borrow?.borrowedDate.split('T')[0]}</TableCell>
-                            <TableCell align="left">{borrow?.dueDate.split('T')[0]}</TableCell>
-                            <TableCell align="left"><Button variant='contained' color='mainBlue' onClick={() => handleOpen(borrow)}>Detail</Button></TableCell>
+                            <TableCell align="left">{isPending ? <Skeleton variant="rounded" className='w-full' height={10} /> : borrow?.borrowedBy?.name}</TableCell>
+                            <TableCell align="left">{isPending ? <Skeleton variant="rounded" className='w-full' height={10} /> : borrow?.borrowedBy?.address}</TableCell>
+                            <TableCell align="left">{isPending ? <Skeleton variant="rounded" className='w-full' height={10} /> : borrow?.borrowedBy?.phoneNumber}</TableCell>
+                            <TableCell align="left">{isPending ? <Skeleton variant="rounded" className='w-full' height={10} /> : borrow?.borrowedDate.split('T')[0]}</TableCell>
+                            <TableCell align="left">{isPending ? <Skeleton variant="rounded" className='w-full' height={10} /> : borrow?.dueDate.split('T')[0]}</TableCell>
+                            <TableCell align="left"><Button disabled={isPending} variant='contained' color='mainBlue' onClick={() => handleOpen(borrow)}>{isPending ? <CircularProgress color='inherit' size={20} /> : 'Detail'}</Button></TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

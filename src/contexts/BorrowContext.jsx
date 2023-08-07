@@ -10,7 +10,7 @@ export const borrowReducer = (state, action) => {
             }
         case 'added_borrow':
             return {
-                borrows: [...action.payload, ...state.borrows]
+                borrows: [action.payload, ...state.borrows]
             }
         case 'changed_borrow':
             return {

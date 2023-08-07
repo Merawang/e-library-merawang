@@ -35,7 +35,7 @@ const AddBook = ({ isOpen, handleClose }) => {
     // Forms
     const [title, setTitle] = useState('');
     const [authors, setAuthors] = useState([]);
-    const [publicationDate, setPublicationDate] = useState('2023-12-20');
+    const [publicationDate, setPublicationDate] = useState('');
     const [publisher, setPublisher] = useState('');
     const [isbn, setIsbn] = useState('');
     const [subjects, setSubjects] = useState([]);
@@ -98,6 +98,7 @@ const AddBook = ({ isOpen, handleClose }) => {
                             <TextField
                                 fullWidth
                                 required
+                                error={message.error}
                                 label="Judul Buku"
                                 placeholder='Contoh: Negeri 5 Menara'
                                 id="title"
@@ -129,6 +130,7 @@ const AddBook = ({ isOpen, handleClose }) => {
                                         {...params}
                                         fullWidth
                                         required
+                                        error={message.error}
                                         label="Author"
                                         placeholder="Contoh: Ahmad Fuadi"
                                         id="authors"
@@ -141,6 +143,7 @@ const AddBook = ({ isOpen, handleClose }) => {
                             <TextField
                                 fullWidth
                                 required
+                                error={message.error}
                                 onChange={(e) => setPublicationDate(e.target.value)}
                                 value={publicationDate}
                                 label="Tanggal Publikasi"
@@ -154,6 +157,7 @@ const AddBook = ({ isOpen, handleClose }) => {
                             <TextField
                                 fullWidth
                                 required
+                                error={message.error}
                                 onChange={(e) => setPublisher(e.target.value)}
                                 value={publisher}
                                 label="Publisher"
@@ -166,6 +170,7 @@ const AddBook = ({ isOpen, handleClose }) => {
                             <TextField
                                 fullWidth
                                 required
+                                error={message.error}
                                 onChange={(e) => setIsbn(e.target.value)}
                                 value={isbn}
                                 label="ISBN"
@@ -197,6 +202,7 @@ const AddBook = ({ isOpen, handleClose }) => {
                                         {...params}
                                         fullWidth
                                         required
+                                        error={message.error}
                                         label="Kategori"
                                         placeholder="Contoh: horror"
                                         id="subjects"
@@ -209,6 +215,7 @@ const AddBook = ({ isOpen, handleClose }) => {
                             <TextField
                                 fullWidth
                                 required
+                                error={message.error}
                                 onChange={(e) => setDdc(e.target.value)}
                                 value={ddc}
                                 label="Dewey Decimal Classification (DDC)"
@@ -221,6 +228,7 @@ const AddBook = ({ isOpen, handleClose }) => {
                             <TextField
                                 fullWidth
                                 required
+                                error={message.error}
                                 onChange={(e) => setPageCount(e.target.value)}
                                 value={pageCount}
                                 label="Jumlah Halaman"

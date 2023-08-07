@@ -66,7 +66,7 @@ const BorrowedBooksDetail = ({ borrow, isOpen, handleClose }) => {
                         <div className="flex flex-row gap-2 mt-2 status-tags absolute">
                             <p>Status: </p>
                             {borrow?.books?.isAvailable ?
-                                <Chip size='small' icon={<DoneIcon />} color="success" label={`Tersedia (${book?.stock})`} className='shadow' />
+                                <Chip size='small' icon={<DoneIcon />} color="success" label={`Tersedia (${borrow?.books?.stock})`} className='shadow' />
                                 :
                                 <Chip size='small' icon={<BlockIcon />} color="warning" label="Stok habis" className='shadow' />
                             }

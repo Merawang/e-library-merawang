@@ -268,18 +268,6 @@ const EditBook = ({ isOpen, handleClose, book }) => {
                 </DialogContent>
                 <DialogActions>
                     <Button color='mainBlue' variant='text' sx={{ m: 1 }} onClick={handleClose}>Tutup</Button>
-                    <Button color='mainBlue' variant='text' sx={{ m: 1 }} onClick={() => handleFill({
-                        title: '',
-                        authors: [],
-                        publicationDate: '12-12-2020',
-                        publisher: '',
-                        isbn: '',
-                        subjects: [],
-                        ddc: '',
-                        pageCount: 0,
-                        description: '',
-                        imageUrl: 'https://www.hachette.co.nz/graphics/CoverNotAvailable.jpg'
-                    })}>Clear</Button>
                     <Button color='mainBlue' disabled={isPending} type='submit' variant='contained' sx={{ m: 1 }} onClick={(e) => handleSubmit(e, book?._id, editedBook)}>{isPending ? <CircularProgress color='inherit' size={20} /> : 'Edit'}</Button>
                 </DialogActions>
             </form>

@@ -32,7 +32,7 @@ const BorrowedBooks = () => {
         setBorrowDetail(borrow)
         setOpen(true);
     }
-    
+
     const handleClose = (borrow) => {
         setOpen(false);
     }
@@ -47,10 +47,58 @@ const BorrowedBooks = () => {
     const [filteredBorrows, setFilteredBorrows] = useState([]);
     useEffect(() => setFilteredBorrows(borrows), [borrows]);
 
-    const filter = (value) => {
-        const filtered = borrows?.filter((item) =>
+    const sortList = [
+        {
+            title: 'Judul Buku (A-Z)',
+            value: 'titleAsc'
+        },
+        {
+            title: 'Judul Buku (Z-A)',
+            value: 'titleDesc'
+        },
+        {
+            title: 'Nama Peminjam (A-Z)',
+            value: 'nameAsc'
+        },
+        {
+            title: 'Nama Peminjam (Z-A)',
+            value: 'nameDesc'
+        },
+        {
+            title: 'Tanggal Peminjaman (Terbaru)',
+            value: 'borrowedDate'
+        },
+    ]
+
+    const sortBorrows = (key, data) => {
+        if (key === 'titleAsc') {
+            return data.sort((a, b) => a.books.title.toLowerCase().localeCompare(b.books.title.toLowerCase()));
+        }
+        else if (key === 'titleDesc') {
+            return data.sort((a, b) => b.books.title.toLowerCase().localeCompare(a.books.title.toLowerCase()));
+        }
+        else if (key === 'nameAsc') {
+            return data.sort((a, b) => a.borrowedBy.name.toLowerCase().localeCompare(b.borrowedBy.name.toLowerCase()));
+        }
+        else if (key === 'nameDesc') {
+            return data.sort((a, b) => b.borrowedBy.name.toLowerCase().localeCompare(a.borrowedBy.name.toLowerCase()));
+        }
+        else if (key === 'borrowedDate') {
+            return data.sort((a, b) => { return Date.parse(a.borrowedDate) - Date.parse(b.borrowedDate) });
+        }
+        else {
+            return data
+        }
+    }
+
+    const filter = (value = searchText, sort = selectedSort) => {
+        let filtered = borrows?.filter((item) =>
             item?.books?.title?.toLowerCase().includes(value.toLowerCase()) || item?.borrowedBy?.name?.toLowerCase().includes(value.toLowerCase())
         );
+
+        if(selectedSort){
+            filtered = sortBorrows(sort, filtered);
+        }
 
         filtered[0] ? setFilteredBorrows(filtered) : setFilteredBorrows([]);
     }
@@ -96,6 +144,7 @@ const BorrowedBooks = () => {
                         setSelectedFilter={setSelectedFilter}
                         selectedSort={selectedSort}
                         setSelectedSort={setSelectedSort}
+                        sortList={sortList}
                     />
                 </div>
             </div>
