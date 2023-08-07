@@ -80,7 +80,7 @@ const BookDetail = ({ book, isOpen, handleClose }) => {
 
     return (<>
         <EditBook book={book} isOpen={isEditOpen} handleClose={handleEditClose} />
-        <AddBorrowedBook book={book} isOpen={isBorrowOpen} handleClose={handleBorrowClose} />
+        {book.stock > 0 ? <AddBorrowedBook book={book} isOpen={isBorrowOpen} handleClose={handleBorrowClose} /> : ''}
         <Dialog
             open={isOpen}
             TransitionComponent={Transition}
@@ -142,7 +142,7 @@ const BookDetail = ({ book, isOpen, handleClose }) => {
             <DialogActions>
                 <Button disabled={isPending} color='mainBlue' variant='text' sx={{ m: 1 }} onClick={handleClose}>Tutup</Button>
                 <Button disabled={isPending} color='mainBlue' endIcon={<GoogleIcon color='' size='small' />} variant={isLoggedIn() ? 'outlined' : 'contained'} sx={{ m: 1 }} onClick={(e) => handleRead(e)}>{isPending ? <CircularProgress color='inherit' size={20} /> : 'Baca Google Books'}</Button>
-                {isLoggedIn() && <Button disabled={isPending} color='mainBlue' variant='contained' sx={{ m: 1 }} onClick={handleBorrowOpen}>Pinjam</Button>}
+                {isLoggedIn() && <Button disabled={isPending || !book.stock > 0} color='mainBlue' variant='contained' sx={{ m: 1 }} onClick={handleBorrowOpen}>{book.stock > 0 ? 'Pinjam': 'Stok Habis'}</Button>}
             </DialogActions>
         </Dialog>
     </>);

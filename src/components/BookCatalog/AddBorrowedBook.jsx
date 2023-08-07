@@ -1,4 +1,5 @@
 import { forwardRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -27,6 +28,7 @@ const Transition = forwardRef(function Transition(props, ref) {
 const AddBorrowedBook = ({ book, isOpen, handleClose }) => {
 
     const baseurl = `${import.meta.env.VITE_BACKEND_BASEURL}/api/borrows`;
+    const navigate = useNavigate();
     const { dispatch } = useBorrowContext();
     const { isPending, message, setLoading, setMessage } = useDisplayContext();
 
@@ -49,6 +51,8 @@ const AddBorrowedBook = ({ book, isOpen, handleClose }) => {
         else {
             handleAdd(e, payload);
             handleClose();
+            navigate('/borrowed-books');
+
         }
     }
 

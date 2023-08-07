@@ -95,10 +95,12 @@ const BookCatalog = () => {
                 <SearchBox
                     placeholder={'Cari buku kesukaanmu di sini..'}
                     searchText={searchText}
+                    setSearchText={setSearchText}
                     filter={filter}
                     selectedFilter={selectedFilter}
                     setSelectedFilter={setSelectedFilter}
                     selectedSort={selectedSort}
+                    setSelectedSort={setSelectedSort}
                     sortList={sortList}
                 />
             </div>

@@ -36,10 +36,10 @@ const Home = () => {
 
         <h1 className="text-black font-bold text-2xl mb-5">Selamat Datang, <span className='text-blue-600'>{username}!</span></h1>
         <div className="intro">
-            Di tengah kemajuan teknologi dan kebutuhan akan informasi yang semakin meningkat, kami dengan bangga mempersembahkan <span className='font-bold inline'>E-Library Seterang Merawang</span>, sebuah perpustakaan digital yang berdedikasi untuk membawa wawasan dan pengetahuan kepada seluruh warga Desa Kimak.
+            Di tengah kemajuan teknologi dan kebutuhan akan informasi yang semakin meningkat, kami dengan bangga mempersembahkan <span className='font-bold inline'>E-Library Desa Kimak</span>, sebuah perpustakaan digital yang berdedikasi untuk membawa wawasan dan pengetahuan kepada seluruh warga Desa Kimak.
         </div>
         <div className="feature mt-5">
-            <h2 className='font-semibold text-xl mb-5' >Apa saja yang bisa dilakukan <span className='font-bold inline'>E-Library Seterang Merawang</span>?</h2>
+            <h2 className='font-semibold text-xl mb-5' >Apa saja yang bisa dilakukan <span className='font-bold inline'>E-Library Desa Kimak</span>?</h2>
             <div className="cards flex w-full gap-6">
                 <div className='card basis-1/4 p-5 flex flex-col outline outline-1 outline-gray-200 shadow-md rounded justify-center items-center transition-all group hover:bg-blue-600'>
                     <h4 className='font-bold text-xl mb-2 group-hover:text-white'>Akses 24/7</h4>

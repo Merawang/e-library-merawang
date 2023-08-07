@@ -127,7 +127,7 @@ const Login = () => {
                                 </div>
                             </form>
                             <p className="text-center text-sm font-light text-gray-500 dark:text-gray-400">
-                                <button className='underline' onClick={handleOpen}>Cara Penggunaan 🛈</button>
+                                <button className='underline' disabled={isPending} onClick={handleOpen}>Cara Penggunaan 🛈</button>
                                 <Dialog
                                     open={isOpen}
                                     onClose={handleClose}>
@@ -142,7 +142,7 @@ const Login = () => {
                                         </DialogContentText>
                                     </DialogContent>
                                     <DialogActions>
-                                        <Button onClick={handleClose}>OK</Button>
+                                        <Button disabled={isPending} onClick={handleClose}>OK</Button>
                                     </DialogActions>
                                 </Dialog>
                             </p>
